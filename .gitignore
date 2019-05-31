@@ -1,3 +1,11 @@
 # Vim
 *.swp
 *.swo
+
+# Build Files
+lib/
+*.a
+*.o
+
+# Ctags
+tags
