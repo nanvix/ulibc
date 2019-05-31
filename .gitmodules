@@ -1,0 +1,4 @@
+[submodule "contrib/microkernel"]
+	path = contrib/microkernel
+	url = https://github.com/nanvix/microkernel
+	branch = unstable
