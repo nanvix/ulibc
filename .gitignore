@@ -9,3 +9,12 @@ lib/
 
 # Ctags
 tags
+
+# Microkernel Headers
+include/nanvix.h
+include/arch/
+include/dev/
+include/grub/
+include/machine/
+include/nanvix/
+include/posix
