@@ -23,37 +23,37 @@
 #
 
 # Builds contrib.
-contrib: contrib-microkernel
+contrib: contrib-libnanvix
 
 # Builds contrib headers.
-contrib-headers: contrib-headers-microkernel
+contrib-headers: contrib-headers-libnanvix
 
 # Cleans contrib.
-contrib-uninstall: contrib-uninstall-microkernel
+contrib-uninstall: contrib-uninstall-libnanvix
 
 # Cleans contrib headers.
-contrib-uninstall-headers: contrib-uninstall-headers-microkernel
+contrib-uninstall-headers: contrib-uninstall-headers-libnanvix
 
 #===============================================================================
-# Microkernel
+# Nanvix Library
 #===============================================================================
 
-# Builds Microkernel.
-contrib-microkernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/microkernel contrib RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/microkernel install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+# Builds Nanvix Library.
+contrib-libnanvix: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix contrib RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix install PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
-# Builds Microkernel headers.
-contrib-headers-microkernel: make-dirs
-	$(MAKE) -C $(CONTRIBDIR)/microkernel contrib-headers RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/microkernel install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+# Builds Nanvix Library headers.
+contrib-headers-libnanvix: make-dirs
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix contrib-headers RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix install-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
 
-# Cleans Microkernel.
-contrib-uninstall-microkernel:
-	$(MAKE) -C $(CONTRIBDIR)/microkernel uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/microkernel contrib-uninstall RELEASE=$(RELEASE)
+# Cleans Nanvix Library.
+contrib-uninstall-libnanvix:
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix uninstall PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix contrib-uninstall RELEASE=$(RELEASE)
 
-# Cleans Microkernel headers.
-contrib-uninstall-headers-microkernel:
-	$(MAKE) -C $(CONTRIBDIR)/microkernel uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
-	$(MAKE) -C $(CONTRIBDIR)/microkernel contrib-uninstall-headers RELEASE=$(RELEASE)
+# Cleans Nanvix Library headers.
+contrib-uninstall-headers-libnanvix:
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix uninstall-headers PREFIX=$(ROOTDIR) RELEASE=$(RELEASE)
+	$(MAKE) -C $(CONTRIBDIR)/libnanvix contrib-uninstall-headers RELEASE=$(RELEASE)
