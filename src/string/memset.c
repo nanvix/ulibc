@@ -35,7 +35,7 @@
  * unsigned char) into each of the first @p n characters of the object
  * pointed to by @p s.
  */
-void *memset(void *s, int c, size_t n)
+void *nanvix_memset(void *s, int c, size_t n)
 {
 	unsigned char *p;
 

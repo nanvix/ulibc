@@ -36,6 +36,6 @@
 	/**
 	 * @brief File streams table.
 	 */
-	extern FILE streams[FOPEN_MAX];
+	extern NANVIX_FILE streams[NANVIX_FOPEN_MAX];
 
 #endif /* _STDIO_H_ */

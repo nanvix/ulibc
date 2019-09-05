@@ -28,7 +28,7 @@
  * to by @p s1. If copying takes place between objects that overlap,
  * the behavior is undefined.
  */
-char *strcpy(char *restrict s1, const char *restrict s2)
+char *nanvix_strcpy(char *restrict s1, const char *restrict s2)
 {
 	char *p1;
 

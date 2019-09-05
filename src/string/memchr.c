@@ -30,7 +30,7 @@
  * (each interpreted as unsigned char) of the object pointed to by @p
  * s.
  */
-void *memchr(const void *s, int c, size_t n)
+void *nanvix_memchr(const void *s, int c, size_t n)
 {
 	const unsigned char *p;
 

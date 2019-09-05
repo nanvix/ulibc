@@ -28,7 +28,7 @@
 #include <errno.h>
 
 /**
- * @brief expand() in at least NALLOC blocks.
+ * @brief nanvix_expand() in at least NALLOC blocks.
  */
 #define NALLOC 511
 
@@ -53,14 +53,15 @@ static struct block head;
 static struct block *freep = NULL;
 
 /**
- * The free() function causes the space pointed to by @p ptr to be
+ * The nanvix_free() function causes the space pointed to by @p ptr to be
  * deallocated, that is, made available for further allocation. If @p
  * ptr is a null pointer, no action occurs. Otherwise, if the argument
- * does not match a pointer earlier returned by the calloc, malloc, or
- * realloc function, or if the space has been deallocated by a call to
- * free or realloc, the behavior is undefined.
+ * does not match a pointer earlier returned by the nanvix_calloc,
+ * nanvix_malloc, or nanvix_realloc function, or if the space has been
+ * deallocated by a call to nanvix_free or nanvix_realloc, the behavior is
+ * undefined.
  */
-void free(void *ptr)
+void nanvix_free(void *ptr)
 {
 	struct block *p;  /* Working block.     */
 	struct block *bp; /* Block being freed. */
@@ -111,7 +112,7 @@ void free(void *ptr)
  * is returned.  Upon failure, a null pointed is returned instead
  * and errno is set to indicate the error.
  */
-static void *expand(unsigned nblocks)
+static void *nanvix_expand(unsigned nblocks)
 {
 	struct block *p;
 
@@ -120,20 +121,20 @@ static void *expand(unsigned nblocks)
 		nblocks = NALLOC;
 
 	/* Request more memory to the kernel. */
-	if ((p = __sbrk((nblocks + 1)*SIZEOF_BLOCK)) == (void *)-1)
+	if ((p = __nanvix_sbrk((nblocks + 1)*SIZEOF_BLOCK)) == (void *)-1)
 		return (NULL);
 
 	p->nblocks = nblocks;
-	free(p + 1);
+	nanvix_free(p + 1);
 
 	return (freep);
 }
 
 /**
- * The malloc() function allocates space for an object whose size is
+ * The nanvix_malloc() function allocates space for an object whose size is
  * specified by @p size and whose value is indeterminate.
  */
-void *malloc(size_t size)
+void *nanvix_malloc(size_t size)
 {
 	struct block *p;     /* Working block.            */
 	struct block *prevp; /* Previous working block.   */
@@ -179,7 +180,7 @@ void *malloc(size_t size)
 		if (p == freep)
 		{
 			/* Expand heap. */
-			if ((p = expand(nblocks)) == NULL)
+			if ((p = nanvix_expand(nblocks)) == NULL)
 				break;
 		}
 	}
@@ -188,22 +189,23 @@ void *malloc(size_t size)
 }
 
 /**
- * The realloc function deallocates the old object pointed to by @p
- * ptr and returns a pointer to a new object that has the size
+ * The nanvix_realloc function deallocates the old object pointed to
+ * by @p ptr and returns a pointer to a new object that has the size
  * specified by @p size. The contents of the new object shall be the
  * same as that of the old object prior to deallocation, up to the
  * lesser of the new and old sizes. Any bytes in the new object beyond
  * the @p size of the old object have indeterminate values.
  *
- * If @p ptr is a null pointer, the realloc function behaves like the
- * malloc function for the specified @p size. Otherwise, if @p ptr
- * does not match a pointer earlier returned by the calloc, malloc, or
- * realloc function, or if the space has been deallocated by a call to
- * the free or realloc function, the behavior is undefined. If memory
- * for the new object cannot be allocated, the old object is not
+ * If @p ptr is a null pointer, the nanvix_realloc function behaves
+ * like the nanvix_malloc function for the specified @p size.
+ * Otherwise, if @p ptr does not match a pointer earlier returned by
+ * the nanvix_calloc, nanvix_malloc, or nanvix_realloc function, or if
+ * the space has been deallocated by a call to the free or
+ * nanvix_realloc function, the behavior is undefined. If memory for
+ * the new object cannot be allocated, the old object is not
  * deallocated and its value is unchanged.
  */
-void *realloc(void *ptr, size_t size)
+void *nanvix_realloc(void *ptr, size_t size)
 {
 	void *newptr;
 
@@ -214,31 +216,31 @@ void *realloc(void *ptr, size_t size)
 		return (NULL);
 	}
 
-	newptr = malloc(size);
+	newptr = nanvix_malloc(size);
 	if (ptr != NULL)
-		memcpy(newptr, ptr, size);
+		nanvix_memcpy(newptr, ptr, size);
 
-	free(ptr);
+	nanvix_free(ptr);
 
 	return (newptr);
 }
 
 /**
- * The calloc() function allocates space for an array of @p nmemb objects,
+ * The nanvix_calloc() function allocates space for an array of @p nmemb objects,
  * each of whose size is size. The space is initialized to all bits
  * zero.)
  */
-void *calloc(size_t nmemb, size_t size)
+void *nanvix_calloc(size_t nmemb, size_t size)
 {
   register char *cp;
 
   nmemb *= size;
 
-  cp = malloc(nmemb);
+  cp = nanvix_malloc(nmemb);
   if (cp == NULL)
     return (NULL);
 
-  memset(cp, 0, nmemb);
+  nanvix_memset(cp, 0, nmemb);
 
   return (cp);
 }

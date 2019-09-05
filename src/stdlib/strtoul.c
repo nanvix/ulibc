@@ -105,7 +105,7 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
-unsigned long strtoul(const char *str, char **endptr, int base)
+unsigned long nanvix_strtoul(const char *str, char **endptr, int base)
 {
 	const char *s = str;
 	unsigned long acc;
@@ -118,7 +118,7 @@ unsigned long strtoul(const char *str, char **endptr, int base)
 	 */
 	do {
 		c = *s++;
-	} while (isspace(c));
+	} while (nanvix_isspace(c));
 	if (c == '-') {
 		neg = 1;
 		c = *s++;
@@ -132,13 +132,13 @@ unsigned long strtoul(const char *str, char **endptr, int base)
 	}
 	if (base == 0)
 		base = c == '0' ? 8 : 10;
-	cutoff = (unsigned long)ULONG_MAX / (unsigned long)base;
-	cutlim = (unsigned long)ULONG_MAX % (unsigned long)base;
+	cutoff = (unsigned long)NANVIX_ULONG_MAX / (unsigned long)base;
+	cutlim = (unsigned long)NANVIX_ULONG_MAX % (unsigned long)base;
 	for (acc = 0, any = 0;; c = *s++) {
-		if (isdigit(c))
+		if (nanvix_isdigit(c))
 			c -= '0';
-		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+		else if (nanvix_isalpha(c))
+			c -= nanvix_isupper(c) ? 'A' - 10 : 'a' - 10;
 		else
 			break;
 		if (c >= base)
@@ -152,7 +152,7 @@ unsigned long strtoul(const char *str, char **endptr, int base)
 		}
 	}
 	if (any < 0) {
-		acc = ULONG_MAX;
+		acc = NANVIX_ULONG_MAX;
 		errno = ERANGE;
 	} else if (neg)
 		acc = -acc;

@@ -60,16 +60,16 @@ extern char **environ;
 
 /**
  * @brief Finds environment variable.
- * 
+ *
  * @param name   Variable name.
  * @param offset Variable offset store location.
- * 
+ *
  * @returns A pointer to a string containing the value for the
  * specified name, upon successful completion. If the specified name
  * cannot be found in the environment of the calling process, a null
  * pointer is returned instead.
  */
-static char *findenv(const char *name, int *offset)
+static char *nanvix_findenv(const char *name, int *offset)
 {
 	register int length; /* Variable name length.         */
 	const char *c;       /* Environment variable name.    */
@@ -87,7 +87,7 @@ static char *findenv(const char *name, int *offset)
 	for (p = environ; *p != NULL; p++)
 	{
 		/* Found. */
-		if (!strncmp(name, *p, length))
+		if (!nanvix_strncmp(name, *p, length))
 		{
 			if (*(c = *p + length) == '=')
 			{
@@ -102,17 +102,17 @@ static char *findenv(const char *name, int *offset)
 
 /**
  * @brief Gets value of an environment variable.
- * 
+ *
  * @param name Variable name.
- * 
+ *
  * @returns A pointer to a string containing the value for the
  * specified name, upon successful completion. If the specified name
  * cannot be found in the environment of the calling process, a null
  * pointer is returned instead.
  */
-char *getenv(const char *name)
+char *nanvix_getenv(const char *name)
 {
 	int offset;
 
-	return (findenv(name, &offset));
+	return (nanvix_findenv(name, &offset));
 }

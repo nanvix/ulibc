@@ -62,14 +62,14 @@
  * The div() function computes @p numer / @p denom and @p numer % @p
  * denom in a single operation.
  */
-div_t div(int numer, int denom)
+nanvix_div_t nanvix_div(int numer, int denom)
 {
-	div_t res;
+	nanvix_div_t res;
 
 	if (denom != 0)
 	{
-		res.quot = abs (numer) / abs(denom);
-		res.rem = abs (numer) % abs(denom);
+		res.quot = nanvix_abs (numer) / nanvix_abs(denom);
+		res.rem = nanvix_abs (numer) % nanvix_abs(denom);
 
 		if ((numer < 0 && denom > 0) || (numer >= 0 && denom < 0))
 			res.quot = -res.quot;
@@ -79,9 +79,9 @@ div_t div(int numer, int denom)
 	else
 	{
 		if (numer < 0)
-			res.quot = INT_MIN;
+			res.quot = NANVIX_INT_MIN;
 		else
-			res.quot = INT_MAX;
+			res.quot = NANVIX_INT_MAX;
 		res.rem = 0;
     }
 

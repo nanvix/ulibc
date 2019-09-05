@@ -31,7 +31,7 @@
  * copying takes place between objects that overlap, the behavior is
  * undefined.
  */
-char *strncpy(char *restrict s1, const char *restrict s2, size_t n)
+char *nanvix_strncpy(char *restrict s1, const char *restrict s2, size_t n)
 {
 	char *p1;       /* Indexes s1. */
 	const char *p2; /* Indexes s2.  */

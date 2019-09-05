@@ -37,7 +37,7 @@
 	 * @returns Returns non-zero if @p c is an alphanumeric character;
 	 * otherwise, it returns 0.
 	 */
-	extern int isalnum(int c);
+	extern int nanvix_isalnum(int c);
 
 	/**
 	 * @brief Tests for an alphabetic character.
@@ -47,17 +47,17 @@
 	 * @returns Returns non-zero if @p c is an alphabetic character;
 	 * otherwise, it returns 0.
 	 */
-	extern int isalpha(int c);
+	extern int nanvix_isalpha(int c);
 
 	/**
-	 * @brief Tests for a control character. 
+	 * @brief Tests for a control character.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a control character;
 	 * otherwise, it returns 0.
 	 */
-	extern int iscntrl(int c);
+	extern int nanvix_iscntrl(int c);
 
 	/**
 	 * @brief Tests for a decimal digit.
@@ -67,77 +67,77 @@
 	 * @returns Returns non-zero if @p c is a decimal digit; otherwise, it
 	 * returns 0.
 	 */
-	extern int isdigit(int c);
+	extern int nanvix_isdigit(int c);
 
 	/**
-	 * @brief Tests for a visible character. 
+	 * @brief Tests for a visible character.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a character with a visible
 	 * representation; otherwise, it returns 0.
 	 */
-	extern int isgraph(int c);
+	extern int nanvix_isgraph(int c);
 
 	/**
-	 * @brief Tests for a lowercase letter. 
+	 * @brief Tests for a lowercase letter.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a lowercase letter; otherwise,
 	 * it returns 0.
 	 */
-	extern int islower(int c);
+	extern int nanvix_islower(int c);
 
 	/**
-	 * @brief Tests for a printable character. 
+	 * @brief Tests for a printable character.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a printable character;
 	 * otherwise, it returns 0.
 	 */
-	extern int isprint(int c);
+	extern int nanvix_isprint(int c);
 
 	/**
-	 * @brief Tests for a punctuation character. 
+	 * @brief Tests for a punctuation character.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a punctuation character;
 	 * otherwise, it returns 0.
 	 */
-	extern int ispunct(int c);
+	extern int nanvix_ispunct(int c);
 
 	/**
-	 * @brief Tests for a white-space character. 
+	 * @brief Tests for a white-space character.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a white-space character;
 	 * otherwise, it returns 0.
 	 */
-	extern int isspace(int c);
+	extern int nanvix_isspace(int c);
 
 	/**
-	 * @brief Tests for an uppercase letter. 
+	 * @brief Tests for an uppercase letter.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is an uppercase letter;
 	 * otherwise, it returns 0.
 	 */
-	extern int isupper(int c);
+	extern int nanvix_isupper(int c);
 
 	/**
-	 * @brief Tests for a hexadecimal digit. 
+	 * @brief Tests for a hexadecimal digit.
 	 *
 	 * @param Character to test.
 	 *
 	 * @returns Returns non-zero if @p c is a hexadecimal digit;
 	 * otherwise, it returns 0.
 	 */
-	extern int isxdigit(int c);
+	extern int nanvix_isxdigit(int c);
 
 /*============================================================================*
  * Character Case Mapping Functions                                           *
@@ -151,16 +151,16 @@
 	 * @returns Returns the lowercase letter corresponding to the argument
 	 * passed; otherwise, they returns the argument unchanged.
 	 */
-	extern int tolower(int c);
+	extern int nanvix_tolower(int c);
 
 	/**
-	 * @brief Transliterates lowercase characters to uppercase. 
+	 * @brief Transliterates lowercase characters to uppercase.
 	 *
 	 * @param Character to transliterate.
 	 *
 	 * @returns Returns the uppercase letter corresponding to the argument
 	 * passed; otherwise, they returns the argument unchanged.
 	 */
-	extern int toupper(int c);
+	extern int nanvix_toupper(int c);
 
 #endif /* ULIBC_CTYPE_H_ */

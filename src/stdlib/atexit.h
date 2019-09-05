@@ -61,7 +61,7 @@
 	/**
 	 * @brief Maximum of atexit() functions
 	 */
-	#define ATEXIT_MAX 32
+	#define NANVIX_ATEXIT_MAX 32
 
 	/**
 	 * @brief atexit() information.
@@ -69,7 +69,7 @@
 	extern struct __atexit
 	{
 		int	_ind;				        /**< Next available index. */
-		void (*_fns[ATEXIT_MAX])(void); /**< atexit() table.       */
+		void (*_fns[NANVIX_ATEXIT_MAX])(void); /**< atexit() table.       */
 	} __atexit;
 
 #endif /* _ATEXIT_H_ */

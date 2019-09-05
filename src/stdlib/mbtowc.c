@@ -24,19 +24,19 @@
 
 /*
  * Copyright (C) 1991-1996 Free Software Foundation, Inc.
- * 
+ *
  * This file is part of the GNU C Library.
- * 
+ *
  * The GNU C Library free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * The GNU C Library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
@@ -169,11 +169,11 @@ static size_t _mbtowc(wchar_t *pwc, const char *s, size_t n)
  * The implementation shall behave as if no library function calls the
  * mbtowc() function.
  */
-int mbtowc(wchar_t *pwc, const char *s, size_t n)
+int nanvix_mbtowc(wchar_t *pwc, const char *s, size_t n)
 {
 	int result;
 
-	/* 
+	/*
 	 * If S is NULL the function has to return null or not null
 	 * depending on the encoding having a state depending encoding or
 	 * not.  This is nonsense because any multibyte encoding has a

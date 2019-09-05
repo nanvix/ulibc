@@ -33,7 +33,7 @@
  * status unsuccessful termination is returned to the host environment
  * by means of the function call raise(SIGABRT).
  */
-void abort(void)
+void nanvix_abort(void)
 {
-	___exit(0);
+	___nanvix_exit(0);
 }

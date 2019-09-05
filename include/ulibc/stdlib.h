@@ -34,7 +34,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern double atof(const char *nptr);
+	extern double nanvix_atof(const char *nptr);
 
 	/**
 	 * @brief Converts a string to an integer.
@@ -43,7 +43,7 @@
 	 *
 	 * @returns The converted value if the value can be represented.
 	 */
-	extern int atoi(const char *nptr);
+	extern int nanvix_atoi(const char *nptr);
 
 	/**
 	 * @brief Converts a string to a long eger.
@@ -52,7 +52,7 @@
 	 *
 	 * @returns The converted value if the value can be represented.
 	 */
-	extern long atol(const char *nptr);
+	extern long nanvix_atol(const char *nptr);
 
 	/**
 	 * @brief Converts a string to a long long eger.
@@ -61,12 +61,12 @@
 	 *
 	 * @returns The converted value if the value can be represented.
 	 */
-	extern long long atoll(const char *nptr);
+	extern long long nanvix_atoll(const char *nptr);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern double strtod(
+	extern double nanvix_strtod(
 		const char * restrict nptr,
 		char ** restrict endptr
 	);
@@ -74,7 +74,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern float strtof(
+	extern float nanvix_strtof(
 		const char * restrict nptr,
 		char ** restrict endptr
 	);
@@ -82,7 +82,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern long double strtold(
+	extern long double nanvix_strtold(
 		const char * restrict nptr,
 		char ** restrict endptr
 	);
@@ -93,7 +93,7 @@
 	 * Ignores `locale' stuff.  Assumes that the upper and lower case
 	 * alphabets and digits are each contiguous.
 	 */
-	extern long strtol(
+	extern long nanvix_strtol(
 		const char * restrict nptr,
 		char ** restrict endptr,
 		int base
@@ -108,7 +108,7 @@
 	 *
 	 * @returns The converted value
 	 */
-	extern long long strtoll(
+	extern long long nanvix_strtoll(
 		const char * restrict nptr,
 		char ** restrict endptr,
 		int base
@@ -123,7 +123,7 @@
 	 *
 	 * @returns The converted value.
 	 */
-	extern unsigned long strtoul(
+	extern unsigned long nanvix_strtoul(
 		const char * restrict nptr,
 		char ** restrict endptr,
 		int base
@@ -138,7 +138,7 @@
 	 *
 	 * @returns The converted value.
 	 */
-	extern unsigned long long strtoull(
+	extern unsigned long long nanvix_strtoull(
 		const char * restrict nptr,
 		char ** restrict endptr,
 		int base
@@ -151,21 +151,21 @@
 	/**
 	 * @brief Maximum value returned by rand().
 	 */
-	#define RAND_MAX 0x7fffffff
+	#define NANVIX_RAND_MAX 0x7fffffff
 
 	/**
 	 * @brief Generates a pseudo-random number.
 	 *
 	 * @returns A pseudo-random integer.
 	 */
-	extern int rand(void);
+	extern int nanvix_rand(void);
 
 	/**
 	 * @brief Sets seed value for pseudo-random number generator.
 	 *
 	 * @param seed Pseudo-random number sequence's seed value.
 	 */
-	extern void srand(unsigned seed);
+	extern void nanvix_srand(unsigned seed);
 
 /*============================================================================*
  * Memory Management Functions                                                *
@@ -184,14 +184,14 @@
 	 * is returned.  Otherwise, it returns a null pointer and set
 	 * errno to indicate the error.
 	 */
-	extern void *calloc(size_t nmemb, size_t size);
+	extern void *nanvix_calloc(size_t nmemb, size_t size);
 
 	/**
 	 * @brief Frees allocated memory.
 	 *
 	 * @param ptr Memory area to free.
 	 */
-	extern void free(void *ptr);
+	extern void nanvix_free(void *ptr);
 
 	/**
 	 * @brief Allocates memory.
@@ -204,7 +204,7 @@
 	 * successfully passed to free() is returned. Otherwise, it
 	 * returns a null pointer and set errno to indicate the error.
 	 */
-	extern void *malloc(size_t size);
+	extern void *nanvix_malloc(size_t size);
 
 	/**
 	 * @brief Reallocates a memory chunk.
@@ -218,7 +218,7 @@
 	 *
 	 * @todo Check if we can simply expand.
 	 */
-	extern void *realloc(void *ptr, size_t size);
+	extern void *nanvix_realloc(void *ptr, size_t size);
 
 /*============================================================================*
  * Communication with the Environment                                         *
@@ -229,7 +229,7 @@
 	 *
 	 * @bug FIXME: this function should conform to the standards.
 	 */
-	extern void abort(void);
+	extern void nanvix_abort(void);
 
 	/**
 	 * @brief Registers a function to run at process termination.
@@ -239,7 +239,7 @@
 	 * @returns Upon successful completion 0 is returned; otherwise, a
 	 * non-zero value is returned.
 	 */
-	extern int atexit(void (*func)(void));
+	extern int nanvix_atexit(void (*func)(void));
 
 	/**
 	 * @brief Terminates the calling process.
@@ -248,7 +248,7 @@
 	 *
 	 * @bug FIXME: this function should conform to the standards.
 	 */
-	extern void exit(int status);
+	extern void nanvix_exit(int status);
 
 	/**
 	 * @brief Gets value of an environment variable.
@@ -260,12 +260,12 @@
 	 * name cannot be found in the environment of the calling process,
 	 * a null pointer is returned instead.
 	 */
-	extern char *getenv(const char *name);
+	extern char *nanvix_getenv(const char *name);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int system(const char *string);
+	extern int nanvix_system(const char *string);
 
 /*============================================================================*
  * Searching and Sorting Utilities                                            *
@@ -284,7 +284,7 @@
 	 * pointer if no match is found. If two or more members compare
 	 * equal, which member is returned is unspecified.
 	 */
-	extern void *bsearch(
+	extern void *nanvix_bsearch(
 		const void *key,
 		const void *base,
 		size_t nmemb,
@@ -300,7 +300,7 @@
 	 * @param size  Size of each element.
 	 * @param cmp   Comparison function.
 	 */
-	extern void qsort(
+	extern void nanvix_qsort(
 		void *base,
 		size_t nmemb,
 		size_t size,
@@ -315,10 +315,6 @@
 
 	#include <ulibc/glue.h>
 
-#elif defined(__unix64__)
-
-	#include <stdlib.h>
-
 #else
 
 	/**
@@ -328,7 +324,7 @@
 	{
 		int quot; /**< Quotient.  */
 		int rem;  /**< Remainder. */
-	} div_t;
+	} nanvix_div_t;
 
 	/**
 	 * @brief Structure type returned by the ldiv() function.
@@ -337,7 +333,7 @@
 	{
 		long int quot; /**< Quotient.  */
 		long int rem;  /**< Remainder. */
-	} ldiv_t;
+	} nanvix_ldiv_t;
 
 #ifndef __STRICT_ANSI__
 
@@ -348,7 +344,7 @@
 	{
 		long long int quot; /**< Quotient.  */
 		long long int rem;  /**< Remainder. */
-	} lldiv_t;
+	} nanvix_lldiv_t;
 
 #endif /* __STRICT_ANSI__ */
 
@@ -361,7 +357,7 @@
 	 *
 	 * @returns The absolute value of its integer operand.
 	 */
-	extern int abs(int j);
+	extern int nanvix_abs(int j);
 
 	/**
 	 * @brief Returns a long eger absolute value.
@@ -370,7 +366,7 @@
 	 *
 	 * @returns The absolute value of the long eger operand.
 	 */
-	extern long  labs(long  j);
+	extern long nanvix_labs(long  j);
 
 	/**
 	 * @brief Returns a long long eger absolute value.
@@ -379,7 +375,7 @@
 	 *
 	 * @returns The absolute value of the long eger operand.
 	 */
-	extern long long  llabs(long long  j);
+	extern long long nanvix_llabs(long long  j);
 
 	/**
 	 * @brief Computes the quotient and remainder of an integer division.
@@ -390,7 +386,7 @@
 	 * @returns A structure of type div_t, comprising both the quotient and the
 	 *          remainder.
 	 */
-	extern div_t div(int numer, int denom);
+	extern nanvix_div_t nanvix_div(int numer, int denom);
 
 	/**
 	 * @brief Computes quotient and remainder of a long division.
@@ -401,7 +397,7 @@
 	 * @returns A structure of type ldiv_t, comprising both the quotient and the
 	 *          remainder.
 	 */
-	extern ldiv_t ldiv(long  numer, long  denom);
+	extern nanvix_ldiv_t nanvix_ldiv(long  numer, long  denom);
 
 #ifndef __STRICT_ANSI__
 
@@ -411,10 +407,10 @@
 	 * @param numer Numerator.
 	 * @param denom Denominator.
 	 *
-	 * @returns A structure of type lldiv_t, comprising both the
+	 * @returns A structure of type nanvix_lldiv_t, comprising both the
 	 * quotient and the remainder.
 	 */
-	extern lldiv_t lldiv(long long  numer, long long  denom);
+	extern nanvix_lldiv_t nanvix_lldiv(long long  numer, long long  denom);
 
 #endif /* __STRICT_ANSI__ */
 
@@ -440,7 +436,7 @@
 	 *
 	 * @note The mblen() function is not thread-safe.
 	 */
-	extern int mblen(const char *s, size_t n);
+	extern int nanvix_mblen(const char *s, size_t n);
 
 	/**
 	 * @brief Converts a character to a wide-character code.
@@ -462,7 +458,7 @@
 	 *
 	 * @note The mbtowc() function is not thread-safe.
 	 */
-	extern int mbtowc(wchar_t * restrict pwc, const char * restrict s, size_t n);
+	extern int nanvix_mbtowc(wchar_t * restrict pwc, const char * restrict s, size_t n);
 
 	/**
 	 * @brief Cconverts a wide-character code to a character.
@@ -478,7 +474,7 @@
 	 * constitute the character
 	 * corresponding to the value of @p wchar.
 	 */
-	extern int wctomb(char *s, wchar_t wchar);
+	extern int nanvix_wctomb(char *s, wchar_t wchar);
 
 /*============================================================================*
  * Multibyte String Functions                                                 *
@@ -487,7 +483,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern size_t mbstowcs(
+	extern size_t nanvix_mbstowcs(
 		wchar_t * restrict pwcs,
 		const char * restrict s,
 		size_t n
@@ -496,7 +492,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern size_t wcstombs(char * restrict s,
+	extern size_t nanvix_wcstombs(char * restrict s,
 		const wchar_t * restrict pwcs,
 		size_t n
 	);

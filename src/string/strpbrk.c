@@ -62,7 +62,7 @@
  * pointed to by @p s1 of any character from the string pointed to by
  * @p s2.
  */
-char *strpbrk(const char *s1, const char *s2)
+char *nanvix_strpbrk(const char *s1, const char *s2)
 {
 	const char *c;
 

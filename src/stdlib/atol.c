@@ -28,7 +28,7 @@
  * The atol() function convert the initial portion of the string
  * pointed to by @p str to long int representation.
  */
-long atol(const char *str)
+long nanvix_atol(const char *str)
 {
-	return (strtol(str, (char **) NULL, 10));
+	return (nanvix_strtol(str, (char **) NULL, 10));
 }

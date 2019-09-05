@@ -72,7 +72,7 @@
  * The tolower() function converts an uppercase letter to a
  * corresponding lowercase letter.
  */
-int tolower(int c)
+int nanvix_tolower(int c)
 {
-  return isupper(c) ? (c) - 'A' + 'a' : c;
+  return nanvix_isupper(c) ? (c) - 'A' + 'a' : c;
 }

@@ -29,7 +29,7 @@
  * object pointed to by @p s1 to the first @p n characters of the
  * object pointed to by @p s2)
  */
-int memcmp(const void *s1, const void *s2, size_t n)
+int nanvix_memcmp(const void *s1, const void *s2, size_t n)
 {
 	const unsigned char *p1;
 	const unsigned char *p2;

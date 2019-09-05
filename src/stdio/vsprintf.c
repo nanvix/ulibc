@@ -35,7 +35,7 @@
  *
  * @returns The number characters in the string.
  */
-static int itoa(char *string, unsigned num, int base)
+static int nanvix_itoa(char *string, unsigned num, int base)
 {
 	char tmp;          /* Temporary variable. */
 	char *s;           /* Working substring.  */
@@ -44,7 +44,7 @@ static int itoa(char *string, unsigned num, int base)
 
 	s = string;
 
-	if (strchr("ud", base) != NULL)
+	if (nanvix_strchr("ud", base) != NULL)
 		divisor = 10;
 
 	else
@@ -84,7 +84,7 @@ static int itoa(char *string, unsigned num, int base)
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int vsprintf(char *string, const char *format, va_list ap)
+int nanvix_vsprintf(char *string, const char *format, va_list ap)
 {
 	char *s;    /* Working string. */
 	char *base; /* Base string.    */
@@ -111,13 +111,13 @@ int vsprintf(char *string, const char *format, va_list ap)
 				/* Decimal. */
 				case 'd':
 				case 'u':
-					string += itoa(string, va_arg(ap, unsigned int), *format);
+					string += nanvix_itoa(string, va_arg(ap, unsigned int), *format);
 					break;
 
 				/* Hexadecimal. */
 				case 'X':
 				case 'x':
-					string += itoa(string, va_arg(ap, unsigned int), *format);
+					string += nanvix_itoa(string, va_arg(ap, unsigned int), *format);
 					break;
 
 				/* String. */

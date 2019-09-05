@@ -62,7 +62,7 @@
  * segment of the string pointed to by @p s1 which consists entirely
  * of characters not from the string pointed to by @p s2.
  */
-size_t strcspn(const char *s1, const char *s2)
+size_t nanvix_strcspn(const char *s1, const char *s2)
 {
 	char c, sc;
 	const char *p, *spanp;

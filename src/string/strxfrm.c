@@ -69,7 +69,7 @@
  * s1 is permitted to be a null pointer. If copying takes place
  * between objects that overlap, the behavior is undefined.
  */
-size_t strxfrm(char *s1, const char *s2, size_t n)
+size_t nanvix_strxfrm(char *s1, const char *s2, size_t n)
 {
 	size_t res;
 	res = 0;

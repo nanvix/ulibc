@@ -43,7 +43,7 @@
 	 * @note If copying takes place between objects that overlap, the behavior is
 	 *       undefined.
 	 */
-	extern void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
+	extern void *nanvix_memcpy(void *restrict s1, const void *restrict s2, size_t n);
 
 	/**
 	 * @brief Copies bytes in memory with overlapping areas.
@@ -56,7 +56,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern void *memmove(void *s1, const void *s2, size_t n);
+	extern void *nanvix_memmove(void *s1, const void *s2, size_t n);
 
 	/**
 	 * @brief Copies a string.
@@ -68,7 +68,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strcpy(char *restrict s1, const char *restrict s2);
+	extern char *nanvix_strcpy(char *restrict s1, const char *restrict s2);
 
 	/**
 	 * @brief Copies part of a string.
@@ -81,7 +81,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strncpy(char *restrict s1, const char *restrict s2, size_t n);
+	extern char *nanvix_strncpy(char *restrict s1, const char *restrict s2, size_t n);
 
 /*============================================================================*
  * Concatenation Functions                                                    *
@@ -97,7 +97,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strcat(char *restrict s1, const char *restrict s2);
+	extern char *nanvix_strcat(char *restrict s1, const char *restrict s2);
 
 	/**
 	 * @brief Concatenates part of two strings.
@@ -110,7 +110,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strncat(char *restrict s1, const char *restrict s2, size_t n);
+	extern char *nanvix_strncat(char *restrict s1, const char *restrict s2, size_t n);
 
 /*============================================================================*
  * Comparison Functions                                                       *
@@ -129,7 +129,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern int memcmp(const void *s1, const void *s2, size_t n);
+	extern int nanvix_memcmp(const void *s1, const void *s2, size_t n);
 
 	/**
 	 * @brief Compares two strings.
@@ -143,7 +143,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern int strcmp(const char *s1, const char *s2);
+	extern int nanvix_strcmp(const char *s1, const char *s2);
 
 	/**
 	 * @brief String comparison using collating information.
@@ -163,7 +163,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern int strcoll(const char *s1, const char *s2);
+	extern int nanvix_strcoll(const char *s1, const char *s2);
 
 	/**
 	 * @brief Compares part of two strings.
@@ -179,7 +179,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern int strncmp(const char *restrict s1, const char *restrict s2, size_t n);
+	extern int nanvix_strncmp(const char *restrict s1, const char *restrict s2, size_t n);
 
 	/**
 	 * @brief Transforms a string into another.
@@ -194,7 +194,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern size_t strxfrm(char *s1, const char *s2, size_t n);
+	extern size_t nanvix_strxfrm(char *s1, const char *s2, size_t n);
 
 /*============================================================================*
  * Search Functions                                                           *
@@ -212,7 +212,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern void *memchr(const void *s, int c, size_t n);
+	extern void *nanvix_memchr(const void *s, int c, size_t n);
 
 	/**
 	 * @brief Finds a byte in string.
@@ -224,7 +224,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strchr(const char *s, int c);
+	extern char *nanvix_strchr(const char *s, int c);
 
 	/**
 	 * @brief Gets the length of a complementary substring.
@@ -237,7 +237,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern size_t strcspn(const char *s1, const char *s2);
+	extern size_t nanvix_strcspn(const char *s1, const char *s2);
 
 	/**
 	 * @brief Scans a string for a byte.
@@ -250,7 +250,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strpbrk(const char *s1, const char *s2);
+	extern char *nanvix_strpbrk(const char *s1, const char *s2);
 
 	/**
 	 * @brief String scanning operation.
@@ -263,7 +263,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strrchr(const char *s, int c);
+	extern char *nanvix_strrchr(const char *s, int c);
 
 	/**
 	 * @brief Gets the length of a substring.
@@ -273,7 +273,7 @@
 	 *
 	 * @returns The length of @p s1 is returned.
 	 */
-	extern size_t strspn(const char *s1, const char *s2);
+	extern size_t nanvix_strspn(const char *s1, const char *s2);
 
 	/**
 	 * @brief Finds a substring.
@@ -287,7 +287,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strstr(const char *s1, const char *s2);
+	extern char *nanvix_strstr(const char *s1, const char *s2);
 
 	/**
 	 * @brief Splits string into tokens.
@@ -300,7 +300,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strtok(char *s1, const char *s2);
+	extern char *nanvix_strtok(char *s1, const char *s2);
 
 /*============================================================================*
  * Miscellaneous Functions                                                    *
@@ -317,7 +317,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern void *memset(void *s, int c, size_t n);
+	extern void *nanvix_memset(void *s, int c, size_t n);
 
 	/**
 	 * @brief Gets error message string.
@@ -328,7 +328,7 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern char *strerror(int errnum);
+	extern char *nanvix_strerror(int errnum);
 
 	/**
 	 * @brief Gets string length.
@@ -339,6 +339,6 @@
 	 *
 	 * @version IEEE Std 1003.1, 2013 Edition
 	 */
-	extern size_t strlen(const char *str);
+	extern size_t nanvix_strlen(const char *str);
 
 #endif /* ULIBC_STRING_H_ */

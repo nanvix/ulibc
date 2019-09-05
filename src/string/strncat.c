@@ -66,7 +66,7 @@
  * always appended to the result) If copying takes place between
  * objects that overlap, the behavior is undefined.
  */
-char *strncat(char *restrict s1, const char *restrict s2, size_t n)
+char *nanvix_strncat(char *restrict s1, const char *restrict s2, size_t n)
 {
 	char *s = s1;
 

@@ -102,16 +102,16 @@ static void swap(void *base, int i, int j, size_t size)
 
 	if (size > max_size)
 	{
-		temp = realloc(temp, size);
+		temp = nanvix_realloc(temp, size);
 		max_size = size;
 	}
 
 	elem1 = ((char *) base) + (i * size);
 	elem2 = ((char *) base) + (j * size);
 
-	memcpy (temp, elem1, size);
-	memcpy (elem1, elem2, size);
-	memcpy (elem2, temp, size);
+	nanvix_memcpy(temp, elem1, size);
+	nanvix_memcpy(elem1, elem2, size);
+	nanvix_memcpy(elem2, temp, size);
 }
 
 /**
@@ -175,7 +175,7 @@ static void _qsort(void *base, int i, int j, size_t size)
  * than zero if the first argument is considered to be respectively
  * less than, equal to, or greater than the second.
  */
-void qsort(
+void nanvix_qsort(
 	void *base,
 	size_t nmemb,
 	size_t size,

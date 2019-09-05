@@ -23,21 +23,15 @@
  */
 
 #include <ulibc/stdio.h>
+#include <ulibc/stdlib.h>
 #include <stddef.h>
 #include <errno.h>
 #include "stdio.h"
 
-/*
- * Import external definitions, instead of including the
- * standard header for that, due to namespace pollution
- * in some targets.
- */
-extern void *malloc(size_t size);
-
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int setvbuf(FILE *stream, char *buf, int type, size_t size)
+int nanvix_setvbuf(NANVIX_FILE *stream, char *buf, int type, size_t size)
 {
 	int ret = 0;
 
@@ -58,10 +52,10 @@ int setvbuf(FILE *stream, char *buf, int type, size_t size)
 		}
 
 		/* Not buffered. */
-		if (type == _IONBF)
+		if (type == _NANVIX_IONBF)
 		{
-			stream->flags &= ~(_IOLBF | _IOFBF);
-			stream->flags |= _IONBF;
+			stream->flags &= ~(_NANVIX_IOLBF | _NANVIX_IOFBF);
+			stream->flags |= _NANVIX_IONBF;
 			stream->count = 0;
 		}
 
@@ -79,17 +73,17 @@ int setvbuf(FILE *stream, char *buf, int type, size_t size)
 			if (buf == NULL)
 			{
 				/* Failed to allocate buffer. */
-				if ((buf = malloc(size)) == NULL)
+				if ((buf = nanvix_malloc(size)) == NULL)
 				{
 					ret = errno;
 					goto done;
 				}
 
-				stream->flags |= _IOMYBUF;
+				stream->flags |= _NANVIX_IOMYBUF;
 			}
 
-			stream->flags &= ~(_IOFBF | _IONBF | _IOFBF);
-			stream->flags |= (type == _IOLBF) ? _IOLBF : _IOFBF;
+			stream->flags &= ~(_NANVIX_IOFBF | _NANVIX_IONBF | _NANVIX_IOFBF);
+			stream->flags |= (type == _NANVIX_IOLBF) ? _NANVIX_IOLBF : _NANVIX_IOFBF;
 			stream->buf = buf;
 			stream->ptr = buf;
 			stream->bufsiz = size;

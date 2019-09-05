@@ -28,13 +28,13 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int puts(const char *str)
+int nanvix_puts(const char *str)
 {
 	int c;
 
 	/* Write string. */
 	while ((c = *str++) != '\0')
-		putchar(c);
+		nanvix_putchar(c);
 
-	return (putchar('\n'));
+	return (nanvix_putchar('\n'));
 }

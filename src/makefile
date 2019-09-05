@@ -27,7 +27,7 @@
 #===============================================================================
 
 # Libraries
-export LIBS  = -Wl,--whole-archive $(LIBNANVIX) $(LIBNAME) $(LIBHAL)
+export LIBS  = -Wl,--whole-archive $(LIBNANVIX) $(LIBKERNEL) $(LIBHAL)
 export LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
 
 #===============================================================================
@@ -35,12 +35,12 @@ export LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
 #===============================================================================
 
 # C Source Files
-SRC += $(wildcard $(CURDIR)/*.c)
-SRC += $(wildcard $(CURDIR)/assert/*.c)
-SRC += $(wildcard $(CURDIR)/ctype/*.c)
-SRC += $(wildcard $(CURDIR)/string/*.c)
-SRC += $(wildcard $(CURDIR)/stdlib/*.c)
-SRC += $(wildcard $(CURDIR)/stdio/*.c)
+SRC += $(wildcard *.c)
+SRC += $(wildcard assert/*.c)
+SRC += $(wildcard ctype/*.c)
+SRC += $(wildcard string/*.c)
+SRC += $(wildcard stdlib/*.c)
+SRC += $(wildcard stdio/*.c)
 
 # Object Files
 OBJ += $(SRC:.c=.$(OBJ_SUFFIX).o)

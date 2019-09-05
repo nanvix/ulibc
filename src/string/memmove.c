@@ -66,7 +66,7 @@
  * and then the @p n characters from the temporary array are copied
  * into the object pointed to by @p s1.
  */
-void *memmove(void *s1, const void *s2, size_t n)
+void *nanvix_memmove(void *s1, const void *s2, size_t n)
 {
 	char *p1;
 	const char *p2;

@@ -45,7 +45,7 @@ static struct
  * The sbrk() function changes the breakpoint value of the calling process to
  * @p size bytes ahead from the current value.
  */
-void *__sbrk(size_t size)
+void *__nanvix_sbrk(size_t size)
 {
 	unsigned char *ptr;
 	unsigned char *brk;
@@ -70,7 +70,7 @@ void *__sbrk(size_t size)
 /**
  * @brief Stub lseek() function.
  */
-off_t __lseek(int fildes, off_t offset, int whence)
+off_t __nanvix_lseek(int fildes, off_t offset, int whence)
 {
 	UNUSED(fildes);
 	UNUSED(offset);
@@ -82,7 +82,7 @@ off_t __lseek(int fildes, off_t offset, int whence)
 /**
  *  Terminates the calling process.
  */
-NORETURN  void ___exit(int status)
+NORETURN  void ___nanvix_exit(int status)
 {
 	((void) status);
 
@@ -93,7 +93,7 @@ NORETURN  void ___exit(int status)
 /**
  * Writes to a file.
  */
-ssize_t __write(int fd, const void *buf, size_t n)
+ssize_t __nanvix_write(int fd, const void *buf, size_t n)
 {
 	return (nanvix_write(fd, buf, n));
 }

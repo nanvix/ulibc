@@ -28,7 +28,7 @@
  * The strlen() function computes the length of the string pointed to
  * by @p s.
  */
-size_t strlen(const char *str)
+size_t nanvix_strlen(const char *str)
 {
 	const char *p;
 

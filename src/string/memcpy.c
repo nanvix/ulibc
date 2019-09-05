@@ -30,7 +30,7 @@
  * takes place between objects that overlap, the behavior is
  * undefined.
  */
-void *memcpy(void *restrict s1, const void *restrict s2, size_t n)
+void *nanvix_memcpy(void *restrict s1, const void *restrict s2, size_t n)
 {
     char *p1;
     const char* p2;

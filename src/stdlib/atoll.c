@@ -28,7 +28,7 @@
  * The atoll() function convert the initial portion of the string
  * pointed to by @p str to long long int representation.
  */
-long long atoll(const char *nptr)
+long long nanvix_atoll(const char *nptr)
 {
-	return (strtoll(nptr, (char **)NULL, 10));
+	return (nanvix_strtoll(nptr, (char **)NULL, 10));
 }

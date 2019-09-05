@@ -38,7 +38,7 @@ unsigned _next = 1;
  * sequence shall be generated as when srand() is first called with a
  * @p seed value of 1.
  */
-void srand(unsigned seed)
+void nanvix_srand(unsigned seed)
 {
 	_next = seed;
 }

@@ -26,7 +26,7 @@
  * The llabs() function computes the absolute value of an integer @p j.
  * If the result cannot be represented, the behavior is undefined.)
  */
-long long int llabs(long long int j)
+long long int nanvix_llabs(long long int j)
 {
 	return ((j < 0) ? -j : j);
 }

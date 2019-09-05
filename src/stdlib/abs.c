@@ -26,7 +26,7 @@
  * The abs() function computes the absolute value of an integer @p j.
  * If the result cannot be represented, the behavior is undefined.)
  */
-int abs(int j)
+int nanvix_abs(int j)
 {
 	return ((j < 0) ? -j : j);
 }

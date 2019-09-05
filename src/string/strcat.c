@@ -31,7 +31,7 @@
  * overwrites the null character at the end of @p s1. If copying takes
  * place between objects that overlap, the behavior is undefined.
  */
-char *strcat(char *restrict s1, const char *restrict s2)
+char *nanvix_strcat(char *restrict s1, const char *restrict s2)
 {
 	char *save = s1;
 

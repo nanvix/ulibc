@@ -62,7 +62,7 @@
  * (converted to a char) in the string pointed to by @p s. The
  * terminating null character is considered to be part of the string.
  */
-char *strrchr(const char *s, int c)
+char *nanvix_strrchr(const char *s, int c)
 {
 	const char *last;
 
