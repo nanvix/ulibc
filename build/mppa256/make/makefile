@@ -76,10 +76,30 @@ all-k1bdp: clean-target
 		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-node.a       \
 		OBJ_SUFFIX=node                                \
 		EXEC=test-driver-k1bdp
+	@$(MAKE) -C $(TESTDIR) all                         \
+		CFLAGS="$(CFLAGS) -D __k1bdp__ -mcluster=node" \
+		LDFLAGS="$(LDFLAGS) -mcluster=node"            \
+		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bdp     \
+		LIBC=$(LIBDIR)/libhal-k1b-node.a               \
+		LIBHAL=$(LIBDIR)/libhal-k1b-node.a             \
+		LIBKERNEL=$(LIBDIR)/libkernel-k1b-node.a       \
+		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-node.a       \
+		OBJ_SUFFIX=node                                \
+		EXEC=test-driver-k1bdp
 
 # Builds everything for node ioddr variant.
 all-k1bio: clean-target
 	@$(MAKE) -C $(SRCDIR) all                           \
+		CFLAGS="$(CFLAGS) -D __k1bio__ -mcluster=ioddr" \
+		LDFLAGS="$(LDFLAGS) -mcluster=ioddr"            \
+		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bio      \
+		LIBC=$(LIBDIR)/libhal-k1b-ioddr.a               \
+		LIBHAL=$(LIBDIR)/libhal-k1b-ioddr.a             \
+		LIBKERNEL=$(LIBDIR)/libkernel-k1b-ioddr.a       \
+		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-ioddr.a       \
+		EXEC=test-driver-k1bio                          \
+		OBJ_SUFFIX=ioddr
+	@$(MAKE) -C $(TESTDIR) all                          \
 		CFLAGS="$(CFLAGS) -D __k1bio__ -mcluster=ioddr" \
 		LDFLAGS="$(LDFLAGS) -mcluster=ioddr"            \
 		LINKERDIR=$(BUILDDIR)/mppa256/linker/k1bio      \
@@ -92,6 +112,7 @@ all-k1bio: clean-target
 # Cleans object files.
 clean-target:
 	@$(MAKE) -C $(SRCDIR) clean
+	@$(MAKE) -C $(TESTDIR) clean
 
 # Cleans everything.
 distclean-target: distclean-k1bdp distclean-k1bio
@@ -99,6 +120,13 @@ distclean-target: distclean-k1bdp distclean-k1bio
 # Cleans everything for node cluster variant.
 distclean-k1bdp: clean-target
 	@$(MAKE) -C $(SRCDIR) distclean              \
+		LIBHAL=$(LIBDIR)/libkernel-k1b-node.a    \
+		LIBKERNEL=$(LIBDIR)/libkernel-k1b-node.a \
+		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-node.a \
+		OBJ_SUFFIX=node                          \
+		EXEC=test-driver-k1bdp
+	@$(MAKE) -C $(TESTDIR) distclean             \
+		LIBHAL=$(LIBDIR)/libkernel-k1b-node.a    \
 		LIBKERNEL=$(LIBDIR)/libkernel-k1b-node.a \
 		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-node.a \
 		OBJ_SUFFIX=node                          \
@@ -107,6 +135,13 @@ distclean-k1bdp: clean-target
 # Cleans everything for node ioddr variant.
 distclean-k1bio: clean-target
 	@$(MAKE) -C $(SRCDIR) distclean               \
+		LIBHAL=$(LIBDIR)/libkernel-k1b-ioddr.a    \
+		LIBKERNEL=$(LIBDIR)/libkernel-k1b-ioddr.a \
+		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-ioddr.a \
+		OBJ_SUFFIX=ioddr                          \
+		EXEC=test-driver-k1bio
+	@$(MAKE) -C $(TESTDIR) distclean              \
+		LIBHAL=$(LIBDIR)/libkernel-k1b-ioddr.a    \
 		LIBKERNEL=$(LIBDIR)/libkernel-k1b-ioddr.a \
 		LIBNANVIX=$(LIBDIR)/libnanvix-k1b-ioddr.a \
 		OBJ_SUFFIX=ioddr                          \

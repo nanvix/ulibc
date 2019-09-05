@@ -45,9 +45,11 @@ export BUILDDIR   := $(ROOTDIR)/build
 export CONTRIBDIR := $(ROOTDIR)/contrib
 export LINKERDIR  := $(BUILDDIR)/$(TARGET)/linker
 export MAKEDIR    := $(BUILDDIR)/$(TARGET)/make
+export BINDIR     := $(ROOTDIR)/bin
 export INCDIR     := $(ROOTDIR)/include
 export LIBDIR     := $(ROOTDIR)/lib
 export SRCDIR     := $(ROOTDIR)/src
+export TESTDIR     := $(ROOTDIR)/test
 
 #===============================================================================
 # Libraries and Binaries
@@ -55,6 +57,13 @@ export SRCDIR     := $(ROOTDIR)/src
 
 # Libraries
 export LIBNAME = libc-$(TARGET)
+export LIBHAL    = $(LIBDIR)/libhal-$(TARGET).a
+export LIBKERNEL = $(LIBDIR)/libkernel-$(TARGET).a
+export LIBNANVIX = $(LIBDIR)/libnanvix-$(TARGET).a
+export LIBC      = $(LIBDIR)/$(LIBNAME).a
+
+# Binaries
+export EXEC = test-driver
 
 #===============================================================================
 # Target-Specific Make Rules
@@ -90,14 +99,13 @@ all: make-dirs all-target
 
 # Make Directories
 make-dirs:
-	@mkdir -p $(LIBDIR)
+	@mkdir -p $(LIBDIR) $(BINDIR)
 
 # Cleans builds.
 clean: clean-target
 
 # Cleans everything.
 distclean: distclean-target
-	 @rm -rf $(LIBDIR)
 
 #===============================================================================
 # Contrib Install and Uninstall Rules

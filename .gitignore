@@ -4,6 +4,7 @@
 
 # Build Files
 lib/
+bin/
 *.a
 *.o
 

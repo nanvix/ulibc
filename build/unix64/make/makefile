@@ -73,11 +73,14 @@ export THEIR_LIBS= -lpthread -lm -lrt
 # Builds everything.
 all-target:
 	@$(MAKE) -C $(SRCDIR) all
+	@$(MAKE) -C $(TESTDIR) all
 
 # Cleans object files.
 clean-target:
 	@$(MAKE) -C $(SRCDIR) clean
+	@$(MAKE) -C $(TESTDIR) clean
 
 # Cleans everything.
 distclean-target:
 	@$(MAKE) -C $(SRCDIR) distclean
+	@$(MAKE) -C $(TESTDIR) distclean
