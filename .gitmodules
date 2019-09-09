@@ -1,3 +1,6 @@
 [submodule "contrib/libnanvix"]
 	path = contrib/libnanvix
 	url = https://github.com/nanvix/libnanvix.git
+[submodule "utils"]
+	path = utils
+	url = https://github.com/nanvix/utils.git
