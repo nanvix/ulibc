@@ -106,7 +106,7 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
-unsigned long long strtoull(const char *str, char **endptr, int base)
+unsigned long long nanvix_strtoull(const char *str, char **endptr, int base)
 {
 	const char *s;
 	unsigned long long acc, cutoff;
@@ -126,7 +126,7 @@ unsigned long long strtoull(const char *str, char **endptr, int base)
 	s = str;
 	do {
 		c = (unsigned char) *s++;
-	} while (isspace(c));
+	} while (nanvix_isspace(c));
 	if (c == '-') {
 		neg = 1;
 		c = *s++;
@@ -144,13 +144,13 @@ unsigned long long strtoull(const char *str, char **endptr, int base)
 	if (base == 0)
 		base = c == '0' ? 8 : 10;
 
-	cutoff = ULLONG_MAX / (unsigned long long)base;
-	cutlim = ULLONG_MAX % (unsigned long long)base;
+	cutoff = NANVIX_ULLONG_MAX / (unsigned long long)base;
+	cutlim = NANVIX_ULLONG_MAX % (unsigned long long)base;
 	for (acc = 0, any = 0;; c = (unsigned char) *s++) {
-		if (isdigit(c))
+		if (nanvix_isdigit(c))
 			c -= '0';
-		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+		else if (nanvix_isalpha(c))
+			c -= nanvix_isupper(c) ? 'A' - 10 : 'a' - 10;
 		else
 			break;
 		if (c >= base)
@@ -159,7 +159,7 @@ unsigned long long strtoull(const char *str, char **endptr, int base)
 			continue;
 		if (acc > cutoff || (acc == cutoff && c > cutlim)) {
 			any = -1;
-			acc = ULLONG_MAX;
+			acc = NANVIX_ULLONG_MAX;
 			errno = ERANGE;
 		} else {
 			any = 1;

@@ -39,16 +39,16 @@
 	 * @param cond Condition to assert.
 	 */
 	#ifndef NDEBUG
-		#define assert(cond) ((cond) ?                                        \
-				(void) 0 :                                                    \
-				(void) _assertfail("assertion failed: %s, file %s, line %d\n",\
+		#define nanvix_assert(cond) ((cond) ?                                        \
+				(void) 0 :                                                           \
+				(void) _nanvix_assertfail("assertion failed: %s, file %s, line %d\n",\
 										#cond, __FILE__, __LINE__ ))
 	#else
-		#define assert(cond) ((cond))
+		#define nanvix_assert(cond) ((cond))
 	#endif
 
 	/* Forward definitions. */
-	extern void _assertfail(const char *, const char *, const char *, int);
+	extern void _nanvix_assertfail(const char *, const char *, const char *, int);
 
 /**@}*/
 

@@ -23,63 +23,75 @@
 #
 
 #===============================================================================
-# Target Configuration
+# Toolchain Configuration 
 #===============================================================================
 
-export CFLAGS  = -D __optimsoc__     # Target
-export CFLAGS += -D __optimsoc4__    # Processor
-export CFLAGS += -D __optimsoc_cluster__ # CLuster
-export CFLAGS += -D __or1k__         # Core
-export CFLAGS += -D __mor1kx__       # Core Variant
-
-#===============================================================================
-# Toolchain Configuration
-#===============================================================================
-
-# Toolchain Directory
-export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/or1k/bin/
-
-# Toolchain
-export CC = $(TOOLCHAIN_DIR)/or1k-elf-gcc
-export LD = $(TOOLCHAIN_DIR)/or1k-elf-ld
-export AR = $(TOOLCHAIN_DIR)/or1k-elf-ar
-
-# Timeout Variable
-export TIMEOUT ?= 5
-
-# Compiler Options
-export CFLAGS += -nostdlib -nostdinc -ffreestanding
-export CFLAGS += -ansi -pedantic-errors
-export CFLAGS += -Wstack-usage=4096
-export CFLAGS += -Wno-type-limits
-export CFLAGS += -Wno-missing-profile
-export CFLAGS += -I $(INCDIR)/posix
-
-# Linker Options
-export LDFLAGS  += -nostdlib -nostdinc -ffreestanding
-
-# Suffix for Objects
-export OBJ_SUFFIX=optimsoc
-
-#===============================================================================
 # Libraries
+LIBS  = -Wl,--whole-archive $(LIBC) $(LIBNANVIX) $(LIBKERNEL) $(LIBHAL) $(LIBLWIP)
+LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
+
+#===============================================================================
+# Sources and Objects
 #===============================================================================
 
-export LIBLWIP =
+# C Source Files
+SRC = $(wildcard *.c)
+
+# Object Files
+OBJ = $(SRC:.c=.$(OBJ_SUFFIX).o)
+
+#===============================================================================
+# Sources (Target Specific)
+#===============================================================================
+
+ifeq ($(TARGET),qemu-x86)
+SRC += $(wildcard lwip/*.c)
+endif
+
+ifeq ($(TARGET),qemu-openrisc)
+SRC += $(wildcard lwip/*.c)
+endif
 
 #===============================================================================
 
-# Builds everything.
-all-target:
-	@$(MAKE) -C $(SRCDIR) all
-	@$(MAKE) -C $(TESTDIR) all
+ifeq ($(TARGET),unix64)
+LINKER_SCRIPT=
+else
+LINKER_SCRIPT = -L $(LINKERDIR)/ -T link.ld
+endif
 
-# Cleans object files.
-clean-target:
-	@$(MAKE) -C $(SRCDIR) clean
-	@$(MAKE) -C $(TESTDIR) clean
+# Builds All Object Files
+all: $(OBJ)
+ifeq ($(VERBOSE), no)
+	@echo [CC] $(BINDIR)/$(EXEC)
+	@$(CC) $(LDFLAGS) $(LINKER_SCRIPT) -o $(BINDIR)/$(EXEC) $(OBJ) $(LIBS)
+else
+	$(CC) $(LDFLAGS) $(LINKER_SCRIPT) -o $(BINDIR)/$(EXEC) $(OBJ) $(LIBS)
+endif
 
-# Cleans everything.
-distclean-target:
-	@$(MAKE) -C $(SRCDIR) distclean
-	@$(MAKE) -C $(TESTDIR) distclean
+# Cleans All Object Files
+clean:
+ifeq ($(VERBOSE), no)
+	@echo [CLEAN] $(OBJ)
+	@rm -rf $(OBJ)
+else
+	rm -rf $(OBJ)
+endif
+
+# Cleans Everything
+distclean: clean
+ifeq ($(VERBOSE), no)
+	@echo [CLEAN] $(BINDIR)/$(EXEC)
+	@rm -rf $(BINDIR)/$(EXEC)
+else
+	rm -rf $(BINDIR)/$(EXEC)
+endif
+
+# Builds a C Source file
+%.$(OBJ_SUFFIX).o: %.c
+ifeq ($(VERBOSE), no)
+	@echo [CC] $@
+	@$(CC) $(CFLAGS) $< -c -o $@
+else
+	$(CC) $(CFLAGS) $< -c -o $@
+endif

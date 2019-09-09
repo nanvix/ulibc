@@ -28,7 +28,7 @@
  * The atoi() function convert the initial portion of the string
  * pointed to by @p str to int representation.
  */
-int atoi(const char *str)
+int nanvix_atoi(const char *str)
 {
-	return ((int)strtol(str, (char **) NULL, 10));
+	return ((int)nanvix_strtol(str, (char **) NULL, 10));
 }

@@ -1,20 +1,33 @@
-# Vim
-*.swp
-*.swo
+# Tools
+tools/dev/toolchain/
+
+# Doxygen
+doc/html
+doxygen.output
 
 # Build Files
+bin/
 lib/
 *.a
+*.img
 *.o
+
+# Output Files
+nanvix-cluster*
 
 # Ctags
 tags
 
-# Microkernel Headers
-include/nanvix.h
+# HAL Headers
 include/arch/
 include/dev/
 include/grub/
 include/machine/
 include/nanvix/
+include/nanvix.h
 include/posix
+
+# IDEs
+*.swp
+*.swo
+*.vscode/

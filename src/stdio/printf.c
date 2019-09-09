@@ -28,13 +28,13 @@
 /*
  * Writes a formated string to the standard output file.
  */
-int printf(const char *format, ...)
+int nanvix_printf(const char *format, ...)
 {
 	int n;        /* Characters written. */
 	va_list args; /* Arguments.          */
 
 	va_start(args, format);
-	n = vfprintf(stdout, format, args);
+	n = nanvix_vfprintf(nanvix_stdout, format, args);
 	va_end(args);
 
 	return (n);

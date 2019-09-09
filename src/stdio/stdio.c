@@ -34,28 +34,28 @@ spinlock_t stdio_lock = SPINLOCK_UNLOCKED;
 /**
  * File streams table.
  */
-FILE streams[FOPEN_MAX] = {
-	{ 0, _IOREAD  | _IOLBF, NULL, NULL, 0, 0 },
-	{ 1, _IOWRITE | _IOLBF, NULL, NULL, 0, 0 },
-	{ 2, _IOWRITE | _IONBF, NULL, NULL, 0, 0 },
+NANVIX_FILE streams[NANVIX_FOPEN_MAX] = {
+	{ 0, _NANVIX_IOREAD  | _NANVIX_IOLBF, NULL, NULL, 0, 0 },
+	{ 1, _NANVIX_IOWRITE | _NANVIX_IOLBF, NULL, NULL, 0, 0 },
+	{ 2, _NANVIX_IOWRITE | _NANVIX_IONBF, NULL, NULL, 0, 0 },
 };
 
-FILE *stdin = &streams[0];  /* Standard input.  */
-FILE *stdout = &streams[1]; /* Standard output. */
-FILE *stderr = &streams[2]; /* Standard error.  */
+NANVIX_FILE *nanvix_stdin = &streams[0];  /* Standard input.  */
+NANVIX_FILE *nanvix_stdout = &streams[1]; /* Standard output. */
+NANVIX_FILE *nanvix_stderr = &streams[2]; /* Standard error.  */
 
 /*
  * Stdio library house keeping.
  */
 void stdio_cleanup(void)
 {
-	FILE *stream;
+	NANVIX_FILE *stream;
 
 	/* Close all streams. */
-	for (stream = &streams[0]; stream < &streams[FOPEN_MAX]; stream++)
+	for (stream = &streams[0]; stream < &streams[NANVIX_FOPEN_MAX]; stream++)
 	{
 		/* Valid stream. */
-		if (stream->flags & (_IORW | _IOREAD | _IOWRITE))
-			fflush(stream);
+		if (stream->flags & (_NANVIX_IORW | _NANVIX_IOREAD | _NANVIX_IOWRITE))
+			nanvix_fflush(stream);
 	}
 }

@@ -27,14 +27,14 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int fputs(const char *str, FILE *stream)
+int nanvix_fputs(const char *str, NANVIX_FILE *stream)
 {
 	int c;       /* Working character. */
 	int ret = 0; /* Return value.      */
 
 	/* Write string. */
 	while ((c = *str++) != '\0')
-		ret = putc(c, stream);
+		ret = nanvix_putc(c, stream);
 
 	return (ret);
 }

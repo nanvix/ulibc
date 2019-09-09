@@ -62,7 +62,7 @@
  * pointed to by @p s1 of the sequence of characters (excluding the
  * terminating null character) in the string pointed to by @p s2.
  */
-char *strstr(const char *s1, const char *s2)
+char *nanvix_strstr(const char *s1, const char *s2)
 {
 	if (*s1 == '\0')
 	{

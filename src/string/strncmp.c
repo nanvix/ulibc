@@ -30,7 +30,7 @@
  * greater than, equal to, or less than the string pointed to by @p
  * s2.
  */
-int strncmp(const char *restrict s1, const char *restrict s2, size_t n)
+int nanvix_strncmp(const char *restrict s1, const char *restrict s2, size_t n)
 {
 	/* Compare strings. */
 	while (n > 0)

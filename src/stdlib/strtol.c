@@ -104,7 +104,7 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
-long strtol(const char *nptr, char **endptr, int base)
+long nanvix_strtol(const char *nptr, char **endptr, int base)
 {
 	register const unsigned char *s = (const unsigned char *)nptr;
 	register unsigned long acc;
@@ -119,7 +119,7 @@ long strtol(const char *nptr, char **endptr, int base)
 	 */
 	do {
 		c = *s++;
-	} while (isspace(c));
+	} while (nanvix_isspace(c));
 	if (c == '-') {
 		neg = 1;
 		c = *s++;
@@ -151,14 +151,14 @@ long strtol(const char *nptr, char **endptr, int base)
 	 * Set any if any `digits' consumed; make it negative to indicate
 	 * overflow.
 	 */
-	cutoff = neg ? -(unsigned long)LONG_MIN : LONG_MAX;
+	cutoff = neg ? -(unsigned long)NANVIX_LONG_MIN : NANVIX_LONG_MAX;
 	cutlim = cutoff % (unsigned long)base;
 	cutoff /= (unsigned long)base;
 	for (acc = 0, any = 0;; c = *s++) {
-		if (isdigit(c))
+		if (nanvix_isdigit(c))
 			c -= '0';
-		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+		else if (nanvix_isalpha(c))
+			c -= nanvix_isupper(c) ? 'A' - 10 : 'a' - 10;
 		else
 			break;
 		if (c >= base)
@@ -172,7 +172,7 @@ long strtol(const char *nptr, char **endptr, int base)
 		}
 	}
 	if (any < 0) {
-		acc = neg ? LONG_MIN : LONG_MAX;
+		acc = neg ? NANVIX_LONG_MIN : NANVIX_LONG_MAX;
 	} else if (neg)
 		acc = -acc;
 	if (endptr != 0)

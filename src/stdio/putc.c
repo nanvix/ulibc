@@ -30,7 +30,7 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int putc(int c, FILE *stream)
+int nanvix_putc(int c, NANVIX_FILE *stream)
 {
 	int n;     /* Characters actually written. */
 	int count; /* Characters to write.         */
@@ -49,29 +49,29 @@ int putc(int c, FILE *stream)
 	}
 
 	/* Now writing. */
-	if (stream->flags & _IORW)
+	if (stream->flags & _NANVIX_IORW)
 	{
-		stream->flags &= ~_IOREAD;
-		stream->flags |= _IOWRITE;
+		stream->flags &= ~_NANVIX_IOREAD;
+		stream->flags |= _NANVIX_IOWRITE;
 	}
 
 	/* File is not writable. */
-	if (!(stream->flags & _IOWRITE))
+	if (!(stream->flags & _NANVIX_IOWRITE))
 	{
-		c = EOF;
+		c = NANVIX_EOF;
 		goto done;
 	}
 
 	/* Synchronize file position. */
-	if (!(stream->flags & _IOEOF))
+	if (!(stream->flags & _NANVIX_IOEOF))
 	{
-		if ((stream->flags & (_IOSYNC | _IOAPPEND)) == (_IOSYNC | _IOAPPEND))
+		if ((stream->flags & (_NANVIX_IOSYNC | _NANVIX_IOAPPEND)) == (_NANVIX_IOSYNC | _NANVIX_IOAPPEND))
 		{
 			/* Failed. */
-			if (__lseek(stream->fd, 0, SEEK_END) < 0)
+			if (__nanvix_lseek(stream->fd, 0, NANVIX_SEEK_END) < 0)
 			{
-				stream->flags |= _IOERROR;
-				c = EOF;
+				stream->flags |= _NANVIX_IOERROR;
+				c = NANVIX_EOF;
 				goto done;
 			}
 		}
@@ -81,12 +81,12 @@ again:
 	count = n = 0;
 
 	/* Not buffered. */
-	if (stream->flags & _IONBF)
+	if (stream->flags & _NANVIX_IONBF)
 	{
 		/* Reset buffer. */
 		stream->count = 0;
 
-		n = __write(stream->fd, &c, count = 1);
+		n = __nanvix_write(stream->fd, &c, count = 1);
 	}
 
 	/* Buffered. */
@@ -96,22 +96,22 @@ again:
 		if ((buf = stream->buf) == NULL)
 		{
 			/* Failed to allocate buffer. */
-			if ((buf = malloc(BUFSIZ)) == NULL)
+			if ((buf = nanvix_malloc(NANVIX_BUFSIZ)) == NULL)
 			{
-				stream->flags &= ~(_IOLBF | _IOFBF);
-				stream->flags |= _IONBF;
+				stream->flags &= ~(_NANVIX_IOLBF | _NANVIX_IOFBF);
+				stream->flags |= _NANVIX_IONBF;
 				goto again;
 			}
 
 			/* Initialize buffer. */
-			stream->flags |= _IOMYBUF;
+			stream->flags |= _NANVIX_IOMYBUF;
 			stream->buf = buf;
 			stream->ptr = buf;
-			stream->bufsiz = BUFSIZ;
+			stream->bufsiz = NANVIX_BUFSIZ;
 		}
 
 		/* Line buffered. */
-		if (stream->flags & _IOLBF)
+		if (stream->flags & _NANVIX_IOLBF)
 		{
 			*stream->ptr++ = c;
 
@@ -121,7 +121,7 @@ again:
 			/* Flush buffer. */
 			if ((stream->ptr == (buf + stream->bufsiz)) || (c == '\n'))
 			{
-				n = __write(stream->fd, buf, count = stream->ptr - buf);
+				n = __nanvix_write(stream->fd, buf, count = stream->ptr - buf);
 				stream->ptr = buf;
 			}
 		}
@@ -132,7 +132,7 @@ again:
 			/* Flush buffer. */
 			if (stream->ptr == (buf + stream->bufsiz))
 			{
-				n = __write(stream->fd, buf, count = stream->bufsiz);
+				n = __nanvix_write(stream->fd, buf, count = stream->bufsiz);
 				stream->ptr = buf;
 			}
 
@@ -146,8 +146,8 @@ again:
 	/* Failed to write. */
 	if (n != count)
 	{
-		stream->flags |= _IOERROR;
-		c = EOF;
+		stream->flags |= _NANVIX_IOERROR;
+		c = NANVIX_EOF;
 		goto done;
 	}
 

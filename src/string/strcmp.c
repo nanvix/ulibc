@@ -26,7 +26,7 @@
  * The strcmp() function compares the string pointed to by @p s1 to
  * the string pointed to by @p s2.
  */
-int strcmp(const char *s1, const char *s2)
+int nanvix_strcmp(const char *s1, const char *s2)
 {
 	/* Compare strings. */
 	while (*s1 == *s2)

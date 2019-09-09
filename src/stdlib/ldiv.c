@@ -62,14 +62,14 @@
  * The ldiv() function computes @p numer / @p denom and @p numer % @p
  * denom in a single operation.
  */
-ldiv_t ldiv(long numer, long denom)
+nanvix_ldiv_t nanvix_ldiv(long numer, long denom)
 {
-	ldiv_t res;
+	nanvix_ldiv_t res;
 
 	if (denom != 0)
 	{
-		res.quot = abs (numer) / abs(denom);
-		res.rem = abs (numer) % abs(denom);
+		res.quot = nanvix_abs (numer) / nanvix_abs(denom);
+		res.rem = nanvix_abs (numer) % nanvix_abs(denom);
 
 		if ((numer < 0 && denom > 0) || (numer >= 0 && denom < 0))
 			res.quot = -res.quot;
@@ -79,9 +79,9 @@ ldiv_t ldiv(long numer, long denom)
 	else
 	{
 		if (numer < 0)
-			res.quot = LONG_MIN;
+			res.quot = NANVIX_LONG_MIN;
 		else
-			res.quot = LONG_MAX;
+			res.quot = NANVIX_LONG_MAX;
 		res.rem = 0;
     }
 

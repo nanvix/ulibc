@@ -28,13 +28,13 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int fprintf(FILE *stream, const char * restrict format, ...)
+int nanvix_fprintf(NANVIX_FILE *stream, const char * restrict format, ...)
 {
 	int n;        /* Characters written. */
 	va_list args; /* Arguments.          */
 
 	va_start(args, format);
-	n = vfprintf(stream, format, args);
+	n = nanvix_vfprintf(stream, format, args);
 	va_end(args);
 
 	return (n);

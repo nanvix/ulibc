@@ -22,18 +22,13 @@
  * SOFTWARE.
  */
 
-#include <ulibc/glue.h>
-
 /**
- * The abort() function causes abnormal program termination to occur,
- * unless the signal SIGABRT is being caught and the signal handler
- * does not return. Whether open output streams are flushed or open
- * streams closed or temporary files removed is
- * implementation-defined. An implementation-defined form of the
- * status unsuccessful termination is returned to the host environment
- * by means of the function call raise(SIGABRT).
+ * @brief Dummy test driver.
  */
-void nanvix_abort(void)
+int main2(int argc, const char *argv[])
 {
-	___nanvix_exit(0);
+	((void) argc);
+	((void) argv);
+
+	return (0);
 }

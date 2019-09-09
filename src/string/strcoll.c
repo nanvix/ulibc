@@ -30,7 +30,7 @@
  * greater than, equal to, or less than the string pointed to by @p s2
  * when both are interpreted as appropriate to the current locale.
  */
-int strcoll(const char *s1, const char *s2)
+int nanvix_strcoll(const char *s1, const char *s2)
 {
-	return (strcmp(s1, s2));
+	return (nanvix_strcmp(s1, s2));
 }

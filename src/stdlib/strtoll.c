@@ -101,7 +101,7 @@
  * Ignores `locale' stuff.  Assumes that the upper and lower case
  * alphabets and digits are each contiguous.
  */
-long long strtoll(const char *nptr, char **endptr, int base)
+long long nanvix_strtoll(const char *nptr, char **endptr, int base)
 {
 	const char *s;
 	long long acc, cutoff;
@@ -117,7 +117,7 @@ long long strtoll(const char *nptr, char **endptr, int base)
 	do
 	{
 		c = (unsigned char) *s++;
-	} while (isspace(c));
+	} while (nanvix_isspace(c));
 	if (c == '-')
 	{
 		neg = 1;
@@ -156,7 +156,7 @@ long long strtoll(const char *nptr, char **endptr, int base)
 	 * Set any if any `digits' consumed; make it negative to indicate
 	 * overflow.
 	 */
-	cutoff = neg ? LLONG_MIN : LLONG_MAX;
+	cutoff = neg ? NANVIX_LLONG_MIN : NANVIX_LLONG_MAX;
 	cutlim = cutoff % base;
 	cutoff /= base;
 	if (neg)
@@ -170,10 +170,10 @@ long long strtoll(const char *nptr, char **endptr, int base)
 	}
 	for (acc = 0, any = 0;; c = (unsigned char) *s++)
 	{
-		if (isdigit(c))
+		if (nanvix_isdigit(c))
 			c -= '0';
-		else if (isalpha(c))
-			c -= isupper(c) ? 'A' - 10 : 'a' - 10;
+		else if (nanvix_isalpha(c))
+			c -= nanvix_isupper(c) ? 'A' - 10 : 'a' - 10;
 		else
 			break;
 		if (c >= base)
@@ -185,7 +185,7 @@ long long strtoll(const char *nptr, char **endptr, int base)
 			if (acc < cutoff || (acc == cutoff && c > cutlim))
 			{
 				any = -1;
-				acc = LLONG_MIN;
+				acc = NANVIX_LLONG_MIN;
 				errno = ERANGE;
 			}
 			else
@@ -200,7 +200,7 @@ long long strtoll(const char *nptr, char **endptr, int base)
 			if (acc > cutoff || (acc == cutoff && c > cutlim))
 			{
 				any = -1;
-				acc = LLONG_MAX;
+				acc = NANVIX_LLONG_MAX;
 				errno = ERANGE;
 			}
 			else

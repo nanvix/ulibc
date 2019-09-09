@@ -64,7 +64,7 @@
  * The implementation shall behave as if no library function calls the
  * rand() function.
  */
-int rand(void)
+int nanvix_rand(void)
 {
 	_next = (_next * 1103515245) + 12345;
 	return ((_next >> 16) & 0x7fff);

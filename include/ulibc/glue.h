@@ -33,29 +33,29 @@
 	 * @name File Offsets
 	 */
 	/**@{*/
-	#define SEEK_CUR 0 /* Set file offset to current plus offset. */
-	#define SEEK_END 1 /* Set file offset to EOF plus offset.     */
-	#define SEEK_SET 2 /* Set file offset to offset.              */
+	#define NANVIX_SEEK_CUR 0 /* Set file offset to current plus offset. */
+	#define NANVIX_SEEK_END 1 /* Set file offset to EOF plus offset.     */
+	#define NANVIX_SEEK_SET 2 /* Set file offset to offset.              */
 	/**@}*/
 
 	/**
 	 * @brief Stub __sbrk() function.
 	 */
-	extern void *__sbrk(size_t size);
+	extern void *__nanvix_sbrk(size_t size);
 
 	/**
 	 * @brief Stub lseek() function.
 	 */
-	extern off_t __lseek(int fildes, off_t offset, int whence);
+	extern off_t __nanvix_lseek(int fildes, off_t offset, int whence);
 
 	/**
 	 * @brief Stub exit() function.
 	 */
-	extern NORETURN void ___exit(int status);
+	extern NORETURN void ___nanvix_exit(int status);
 
 	/**
 	 * @brief Stub write() function.
 	 */
-	extern ssize_t __write(int fd, const void *buf, size_t n);
+	extern ssize_t __nanvix_write(int fd, const void *buf, size_t n);
 
 #endif /* ULIBC_GLUE_H_ */

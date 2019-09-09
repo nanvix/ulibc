@@ -28,8 +28,8 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-void _assertfail(const char *msg, const char *cond, const char *file, int line)
+void _nanvix_assertfail(const char *msg, const char *cond, const char *file, int line)
 {
-	fprintf(stderr, msg, cond, file, line);
-	abort();
+	nanvix_fprintf(nanvix_stderr, msg, cond, file, line);
+	nanvix_abort();
 }

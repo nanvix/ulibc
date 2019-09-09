@@ -67,10 +67,10 @@ struct __atexit __atexit = { 0, };
  * The atexit() function registers the function pointed to by @p func,
  * to be called without arguments at normal program termination.
  */
-int atexit(void (*func)(void))
+int nanvix_atexit(void (*func)(void))
 {
 	/* Too many functions registered. */
-	if (__atexit._ind >= ATEXIT_MAX)
+	if (__atexit._ind >= NANVIX_ATEXIT_MAX)
 		return (-1);
 
 	__atexit._fns[__atexit._ind++] = func;

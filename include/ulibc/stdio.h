@@ -31,33 +31,33 @@
 	/**
 	 * @brief maximum number of opened file stream.
 	 */
-	#define FOPEN_MAX 8
+	#define NANVIX_FOPEN_MAX 8
 
 	/**
 	 * @brief Standard buffer size (in bytes).
 	 */
-	#define BUFSIZ 1024
+	#define NANVIX_BUFSIZ 1024
 
 	/**
 	 * @brief End of file.
 	 */
-	#define EOF -1
+	#define NANVIX_EOF -1
 
 	/**
 	 * @name File Stream Flags
 	 */
 	/**@{*/
-	#define _IOFBF    00001 /**< Fully buffered?               */
-	#define _IOLBF    00002 /**< Line buffered?                */
-	#define _IONBF    00004 /**< Unbuffered?                   */
-	#define _IORW     00010 /**< Read/Write                    */
-	#define _IOREAD   00020 /**< Readable?                     */
-	#define _IOWRITE  00040 /**< Writable?                     */
-	#define _IOAPPEND 00100 /**< Append?                       */
-	#define _IOEOF    00200 /**< End of file reached?          */
-	#define _IOERROR  00400 /**< Error encountered?            */
-	#define _IOMYBUF  01000 /**< Library buffer?               */
-	#define _IOSYNC   02000 /**< Sync file position on append? */
+	#define _NANVIX_IOFBF    00001 /**< Fully buffered?               */
+	#define _NANVIX_IOLBF    00002 /**< Line buffered?                */
+	#define _NANVIX_IONBF    00004 /**< Unbuffered?                   */
+	#define _NANVIX_IORW     00010 /**< Read/Write                    */
+	#define _NANVIX_IOREAD   00020 /**< Readable?                     */
+	#define _NANVIX_IOWRITE  00040 /**< Writable?                     */
+	#define _NANVIX_IOAPPEND 00100 /**< Append?                       */
+	#define _NANVIX_IOEOF    00200 /**< End of file reached?          */
+	#define _NANVIX_IOERROR  00400 /**< Error encountered?            */
+	#define _NANVIX_IOMYBUF  01000 /**< Library buffer?               */
+	#define _NANVIX_IOSYNC   02000 /**< Sync file position on append? */
 	/**@}*/
 
 	/**
@@ -76,15 +76,15 @@
 		char *ptr;     /**< Next Character  */
 		size_t bufsiz; /**< Buffer Size     */
 		int count;     /**< Character Count */
-	} FILE;
+	} NANVIX_FILE;
 
 	/**
 	 * @brief Standard File Streams
 	 */
 	/**@{*/
-	extern FILE *stdin;  /**< Standard Input  */
-	extern FILE *stdout; /**< Standard Output */
-	extern FILE *stderr; /**< Standard Error  */
+	extern NANVIX_FILE *nanvix_stdin;  /**< Standard Input  */
+	extern NANVIX_FILE *nanvix_stdout; /**< Standard Output */
+	extern NANVIX_FILE *nanvix_stderr; /**< Standard Error  */
 	/**@}*/
 
 /*============================================================================*
@@ -94,22 +94,22 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int remove(const char *filename);
+	extern int nanvix_remove(const char *filename);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int rename(const char *old, const char *new);
+	extern int nanvix_rename(const char *old, const char *new);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern FILE *tmpfile(void);
+	extern NANVIX_FILE *nanvix_tmpfile(void);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern char *tmpnam(char *s);
+	extern char *nanvix_tmpnam(char *s);
 
 /*============================================================================*
  * File Access Functions                                                      *
@@ -118,27 +118,27 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fclose(FILE *stream);
+	extern int nanvix_fclose(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fflush(FILE *stream);
+	extern int nanvix_fflush(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern FILE *fopen(const char * restrict filename, const char * restrict mode);
+	extern NANVIX_FILE *nanvix_fopen(const char * restrict filename, const char * restrict mode);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern FILE *freopen(const char * restrict filename, const char * restrict mode, FILE * restrict stream);
+	extern NANVIX_FILE *nanvix_freopen(const char * restrict filename, const char * restrict mode, NANVIX_FILE * restrict stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern void setbuf(FILE * restrict stream, char * restrict buf);
+	extern void nanvix_setbuf(NANVIX_FILE * restrict stream, char * restrict buf);
 
 	/**
 	 * @brief Assigns a buffer to a stream.
@@ -151,8 +151,8 @@
 	 * @param Upon successful completion, zero is returned. Upon
 	 * failure non-zero is returned instead.
 	 */
-	extern int setvbuf(
-		FILE * restrict stream,
+	extern int nanvix_setvbuf(
+		NANVIX_FILE * restrict stream,
 		char * restrict buf,
 		int mode,
 		size_t size
@@ -172,40 +172,40 @@
 	 * written is returned. Upon failure, a negative value is returned
 	 * instead.
 	 */
-	extern int fprintf(
-		FILE * restrict stream,
+	extern int nanvix_fprintf(
+		NANVIX_FILE * restrict stream,
 		const char * restrict format, ...
 	);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fscanf(FILE * restrict stream, const char * restrict format, ...);
+	extern int nanvix_fscanf(NANVIX_FILE * restrict stream, const char * restrict format, ...);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int printf(const char * restrict format, ...);
+	extern int nanvix_printf(const char * restrict format, ...);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int scanf(const char * restrict format, ...);
+	extern int nanvix_scanf(const char * restrict format, ...);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int snprintf(char * restrict s, size_t n, const char * restrict format, ...);
+	extern int nanvix_snprintf(char * restrict s, size_t n, const char * restrict format, ...);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int sprintf(char * restrict s, const char * restrict format, ...);
+	extern int nanvix_sprintf(char * restrict s, const char * restrict format, ...);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int sscanf(const char * restrict s, const char * restrict format, ...);
+	extern int nanvix_sscanf(const char * restrict s, const char * restrict format, ...);
 
 	/**
 	 * @brief Writes format output of an argument list to a file.
@@ -218,8 +218,8 @@
 	 * written is returned. Upon failure, a negative value is returned
 	 * instead.
 	 */
-	extern int vfprintf(
-		FILE * restrict stream,
+	extern int nanvix_vfprintf(
+		NANVIX_FILE * restrict stream,
 		const char * restrict format,
 		va_list arg
 	);
@@ -227,22 +227,22 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int vfscanf(FILE * restrict stream, const char * restrict format, va_list arg);
+	extern int nanvix_vfscanf(NANVIX_FILE * restrict stream, const char * restrict format, va_list arg);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int vprintf(const char * restrict format, va_list arg);
+	extern int nanvix_vprintf(const char * restrict format, va_list arg);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int vscanf(const char * restrict format, va_list arg);
+	extern int nanvix_vscanf(const char * restrict format, va_list arg);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int vsnprintf(
+	extern int nanvix_vsnprintf(
 		char * restrict s,
 		size_t n,
 		const char * restrict format,
@@ -260,7 +260,7 @@
 	 * written is returned. Upon failure, a negative value is returned
 	 * instead.
 	 */
-	extern int vsprintf(
+	extern int nanvix_vsprintf(
 		char * restrict s,
 		const char * restrict format,
 		va_list arg
@@ -269,7 +269,7 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int vsscanf(const char * restrict s, const char * restrict format, va_list arg);
+	extern int nanvix_vsscanf(const char * restrict s, const char * restrict format, va_list arg);
 
 /*============================================================================*
  * Character Input/Output Functions                                           *
@@ -278,12 +278,12 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fgetc(FILE *stream);
+	extern int nanvix_fgetc(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern char *fgets(char * restrict s, int n, FILE * restrict stream);
+	extern char *nanvix_fgets(char * restrict s, int n, NANVIX_FILE * restrict stream);
 
 	/**
 	 * @brief Writes a string to a file.
@@ -294,22 +294,22 @@
 	 * @param Upon successful completion, a non-negative value is
 	 * returned. Upon failure, EOF is returned instead.
 	 */
-	extern int fputs(const char * restrict s, FILE * restrict stream);
+	extern int nanvix_fputs(const char * restrict s, NANVIX_FILE * restrict stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int getc(FILE *stream);
+	extern int nanvix_getc(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int getchar(void);
+	extern int nanvix_getchar(void);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern char *gets(char *s);
+	extern char *nanvix_gets(char *s);
 
 	/**
 	 * @brief Writes a character to a file.
@@ -321,7 +321,7 @@
 	 * returned. Upon failure, the error indicator for the stream is
 	 * set and EOF is returned.
 	 */
-	extern int putc(int c, FILE *stream);
+	extern int nanvix_putc(int c, NANVIX_FILE *stream);
 
 	/**
 	 * @brief Writes a string to the standard output file..
@@ -332,12 +332,12 @@
 	 * @param Upon successful completion, a non-negative value is
 	 * returned. Upon failure, EOF is returned instead.
 	 */
-	extern int puts(const char *s);
+	extern int nanvix_puts(const char *s);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int ungetc(int c, FILE *stream);
+	extern int nanvix_ungetc(int c, NANVIX_FILE *stream);
 
 	/**
 	 * @brief Writes a character to the standard output file.
@@ -349,9 +349,9 @@
 	 * returned. Upon failure, the error indicator for the stream is
 	 * set and EOF is returned.
 	 */
-	static inline int putchar(int c)
+	static inline int nanvix_putchar(int c)
 	{
-		return (putc(c, stdout));
+		return (nanvix_putc(c, nanvix_stdout));
 	}
 
 	/**
@@ -364,9 +364,9 @@
 	 * returned. Upon failure, the error indicator for the stream is
 	 * set and EOF is returned.
 	 */
-	static inline int fputc(int c, FILE *stream)
+	static inline int fputc(int c, NANVIX_FILE *stream)
 	{
-		return (putc(c, stream));
+		return (nanvix_putc(c, stream));
 	}
 
 /*============================================================================*
@@ -376,12 +376,12 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern size_t fread(void * restrict ptr, size_t size, size_t nmemb, FILE * restrict stream);
+	extern size_t nanvix_fread(void * restrict ptr, size_t size, size_t nmemb, NANVIX_FILE * restrict stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern size_t fwrite(const void * restrict ptr, size_t size, size_t nmemb, FILE * restrict stream);
+	extern size_t nanvix_fwrite(const void * restrict ptr, size_t size, size_t nmemb, NANVIX_FILE * restrict stream);
 
 /*============================================================================*
  * File Positioning Functions                                                 *
@@ -390,32 +390,32 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern size_t fread(void * restrict ptr, size_t size, size_t nmemb, FILE * restrict stream);
+	extern size_t nanvix_fread(void * restrict ptr, size_t size, size_t nmemb, NANVIX_FILE * restrict stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fgetpos(FILE * restrict stream, fpos_t * restrict pos);
+	extern int nanvix_fgetpos(NANVIX_FILE * restrict stream, fpos_t * restrict pos);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fseek(FILE *stream, long int offset, int whence);
+	extern int nanvix_fseek(NANVIX_FILE *stream, long int offset, int whence);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int fsetpos(FILE *stream, const fpos_t *pos);
+	extern int nanvix_fsetpos(NANVIX_FILE *stream, const fpos_t *pos);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern long int ftell(FILE *stream);
+	extern long int nanvix_ftell(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern void rewind(FILE *stream);
+	extern void nanvix_rewind(NANVIX_FILE *stream);
 
 /*============================================================================*
  * Error-Handling Functions                                                   *
@@ -424,21 +424,21 @@
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern void clearerr(FILE *stream);
+	extern void nanvix_clearerr(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int feof(FILE *stream);
+	extern int nanvix_feof(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern int ferror(FILE *stream);
+	extern int nanvix_ferror(NANVIX_FILE *stream);
 
 	/**
 	 * @todo: TODO implement this function.
 	 */
-	extern void perror(const char *s);
+	extern void nanvix_perror(const char *s);
 
 #endif /* ULIBC_STDIO_H_ */

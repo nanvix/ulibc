@@ -44,7 +44,7 @@
  * of the @p status unsuccessful termination is returned. Otherwise
  * the @p status returned is implementation-defined.
  */
-void exit(int status)
+void nanvix_exit(int status)
 {
 	/*
 	 * Call registered atexit() functions
@@ -54,5 +54,5 @@ void exit(int status)
 	while (__atexit._ind-- > 0)
 		__atexit._fns[__atexit._ind]();
 
-	___exit(status);
+	___nanvix_exit(status);
 }

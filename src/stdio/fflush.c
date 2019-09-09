@@ -30,17 +30,17 @@
 /*
  * Flushes a stream.
  */
-static int do_fflush(FILE *stream)
+static int do_fflush(NANVIX_FILE *stream)
 {
 	char *buf; /* Buffer.              */
 	ssize_t n; /* Byte count to flush. */
 
 	/* Not buffered. */
-	if (stream->flags & _IONBF)
+	if (stream->flags & _NANVIX_IONBF)
 		return (0);
 
 	/* Not writable. */
-	if (!(stream->flags & _IOWRITE))
+	if (!(stream->flags & _NANVIX_IOWRITE))
 		return (0);
 
 	/* No buffer assigned. */
@@ -53,13 +53,13 @@ static int do_fflush(FILE *stream)
 
 	/* Reset buffer. */
 	stream->ptr = buf;
-	stream->count = (stream->flags & _IOLBF) ? 0 : stream->bufsiz - 1;
+	stream->count = (stream->flags & _NANVIX_IOLBF) ? 0 : stream->bufsiz - 1;
 
 	/* Flush. */
-	if (__write(stream->fd, buf, n) != n)
+	if (__nanvix_write(stream->fd, buf, n) != n)
 	{
-		stream->flags |= _IOERROR;
-		return (EOF);
+		stream->flags |= _NANVIX_IOERROR;
+		return (NANVIX_EOF);
 	}
 
 	return (0);
@@ -68,7 +68,7 @@ static int do_fflush(FILE *stream)
 /*
  * Flushes a file stream.
  */
-int fflush(FILE *stream)
+int nanvix_fflush(NANVIX_FILE *stream)
 {
 	int ret = 0;
 
@@ -77,7 +77,7 @@ int fflush(FILE *stream)
 		/* Flush all streams. */
 		if (stream == NULL)
 		{
-			for (stream = &streams[0]; stream < &streams[FOPEN_MAX]; stream++)
+			for (stream = &streams[0]; stream < &streams[NANVIX_FOPEN_MAX]; stream++)
 				ret |= do_fflush(stream);
 
 			goto done;

@@ -29,17 +29,17 @@
 /**
  * @todo TODO: provide a detailed description for this function.
  */
-int vfprintf(FILE *stream, const char *format, va_list ap)
+int nanvix_vfprintf(NANVIX_FILE *stream, const char *format, va_list ap)
 {
 	int n;               /* Characters written. */
-	char buffer[BUFSIZ]; /* Buffer.             */
+	char buffer[NANVIX_BUFSIZ]; /* Buffer.             */
 
 	/* Format string. */
-	n = vsprintf(buffer, format, ap);
+	n = nanvix_vsprintf(buffer, format, ap);
 
 	/* Write formated string to file. */
 	if (n > 0)
-		fputs(buffer, stream);
+		nanvix_fputs(buffer, stream);
 
 	return (n);
 }

@@ -29,7 +29,7 @@
  * (converted to a char) in the string pointed to by @p s. The
  * terminating null character is considered to be part of the string.
  */
-char *strchr(const char *s, int c)
+char *nanvix_strchr(const char *s, int c)
 {
 	/* Scan string. */
 	while (*s != '\0')

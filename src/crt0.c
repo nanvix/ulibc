@@ -29,7 +29,7 @@
 /*
  * Main routine.
  */
-extern int main(int argc, const char *argv[]);
+extern int main2(int argc, const char *argv[]);
 
 /**
  * @brief Environment variables.
@@ -42,15 +42,15 @@ char **environ = NULL;
 void ___start(int argc, const char *argv[], char **envp)
 {
 	int ret;
-	static char stdout_buffer[BUFSIZ];
-	static char stderr_buffer[BUFSIZ];
+	static char stdout_buffer[NANVIX_BUFSIZ];
+	static char stderr_buffer[NANVIX_BUFSIZ];
 
-	setvbuf(stdout, stdout_buffer, _IOLBF, BUFSIZ);
-	setvbuf(stdout, stderr_buffer, _IOLBF, BUFSIZ);
+	nanvix_setvbuf(nanvix_stdout, stdout_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
+	nanvix_setvbuf(nanvix_stdout, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
 
 	environ = envp;
 
-	ret = main(argc, argv);
+	ret = main2(argc, argv);
 
-	___exit(ret);
+	___nanvix_exit(ret);
 }

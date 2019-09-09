@@ -39,8 +39,11 @@ export PREFIX ?= $(HOME)
 # Directories
 #===============================================================================
 
+.PHONY: test
+
 # Directories
 export ROOTDIR    := $(CURDIR)
+export BINDIR     := $(ROOTDIR)/bin
 export BUILDDIR   := $(ROOTDIR)/build
 export CONTRIBDIR := $(ROOTDIR)/contrib
 export LINKERDIR  := $(BUILDDIR)/$(TARGET)/linker
@@ -48,6 +51,8 @@ export MAKEDIR    := $(BUILDDIR)/$(TARGET)/make
 export INCDIR     := $(ROOTDIR)/include
 export LIBDIR     := $(ROOTDIR)/lib
 export SRCDIR     := $(ROOTDIR)/src
+export TESTDIR    := $(ROOTDIR)/test
+export TOOLSDIR   := $(ROOTDIR)/utils
 
 #===============================================================================
 # Libraries and Binaries
@@ -55,6 +60,18 @@ export SRCDIR     := $(ROOTDIR)/src
 
 # Libraries
 export LIBNAME = libc-$(TARGET)
+export LIBHAL    = $(LIBDIR)/libhal-$(TARGET).a
+export LIBKERNEL = $(LIBDIR)/libkernel-$(TARGET).a
+export LIBNANVIX = $(LIBDIR)/libnanvix-$(TARGET).a
+export LIBC      = $(LIBDIR)/$(LIBNAME).a
+
+#
+# Binaries
+#
+# TODO: We should make this generic.
+#
+export EXEC     = test-driver
+export BINARIES = $(EXEC)
 
 #===============================================================================
 # Target-Specific Make Rules
@@ -85,19 +102,24 @@ export ARFLAGS = rc
 
 #===============================================================================
 
+# Image Name
+export IMAGE = ulibc-debug.img
+
 # Builds Everything
-all: make-dirs all-target
+all: image-tests
 
 # Make Directories
 make-dirs:
-	@mkdir -p $(LIBDIR)
+	@mkdir -p $(LIBDIR) $(BINDIR)
+
+image-tests: | make-dirs all-target
+	bash $(TOOLSDIR)/nanvix-build-image.sh $(IMAGE) $(BINDIR) "$(BINARIES)"
 
 # Cleans builds.
 clean: clean-target
 
 # Cleans everything.
 distclean: distclean-target
-	 @rm -rf $(LIBDIR)
 
 #===============================================================================
 # Contrib Install and Uninstall Rules
@@ -110,3 +132,9 @@ include $(BUILDDIR)/makefile.contrib
 #===============================================================================
 
 include $(BUILDDIR)/makefile.install
+
+#===============================================================================
+# Debug and Run Rules
+#===============================================================================
+
+include $(BUILDDIR)/makefile.run

@@ -62,7 +62,7 @@
  * string. Typically, the values for errnum come from @p errno, but
  * strerror() shall map any value of type int to a message.
  */
-char *strerror(int errnum)
+char *nanvix_strerror(int errnum)
 {
 	char *error;
 

@@ -94,7 +94,7 @@ static char *_scanpoint = NULL;
  * The implementation shall behave as if no library function calls the
  * strtok() function.
  */
-char *strtok(char *s1, const char *s2)
+char *nanvix_strtok(char *s1, const char *s2)
 {
 	char *scan;
 	char *tok;

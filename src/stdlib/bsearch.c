@@ -73,7 +73,7 @@
  * the elements that compare greater than the @p key object, in that
  * order.)
  */
-void *bsearch(
+void *nanvix_bsearch(
 	const void *key,
 	const void *base,
 	size_t nmemb,
