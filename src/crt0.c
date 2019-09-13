@@ -46,7 +46,7 @@ void ___start(int argc, const char *argv[], char **envp)
 	static char stderr_buffer[NANVIX_BUFSIZ];
 
 	nanvix_setvbuf(nanvix_stdout, stdout_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
-	nanvix_setvbuf(nanvix_stdout, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
+	nanvix_setvbuf(nanvix_stderr, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
 
 	environ = envp;
 
