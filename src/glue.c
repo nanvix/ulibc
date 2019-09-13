@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-#include <nanvix.h>
+#include <nanvix/sys/dev.h>
+#include <nanvix/sys/thread.h>
 #include <stddef.h>
 
 /**

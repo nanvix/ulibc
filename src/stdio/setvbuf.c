@@ -25,7 +25,7 @@
 #include <ulibc/stdio.h>
 #include <ulibc/stdlib.h>
 #include <stddef.h>
-#include <errno.h>
+#include <posix/errno.h>
 #include "stdio.h"
 
 /**

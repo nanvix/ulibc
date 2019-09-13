@@ -25,7 +25,7 @@
 #ifndef ULIBC_STDIO_H_
 #define ULIBC_STDIO_H_
 
-	#include <stdarg.h>
+	#include <posix/stdarg.h>
 	#include <stddef.h>
 
 	/**

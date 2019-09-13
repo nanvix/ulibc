@@ -25,7 +25,7 @@
 #include <ulibc/string.h>
 #include <ulibc/glue.h>
 #include <stddef.h>
-#include <errno.h>
+#include <posix/errno.h>
 
 /**
  * @brief nanvix_expand() in at least NALLOC blocks.

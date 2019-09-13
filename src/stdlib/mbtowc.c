@@ -45,7 +45,7 @@
 
 #include <ulibc/wchar.h>
 #include <stddef.h>
-#include <errno.h>
+#include <posix/errno.h>
 
 /**
  * @brief Number of bytes needed for the current character.

@@ -55,7 +55,7 @@
  * SUCH DAMAGE.
  */
 
-#include <errno.h>
+#include <posix/errno.h>
 
 /**
  * The strerror() function maps the number in @p errnum to a message

@@ -57,7 +57,7 @@
 
 #include <ulibc/ctype.h>
 #include <ulibc/limits.h>
-#include <errno.h>
+#include <posix/errno.h>
 
 /**
  * The strtoul() function converts the initial portion of the string

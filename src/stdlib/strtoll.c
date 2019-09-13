@@ -52,7 +52,7 @@
  */
 
 #include <ulibc/ctype.h>
-#include <errno.h>
+#include <posix/errno.h>
 #include <ulibc/limits.h>
 
 /**
