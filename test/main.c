@@ -25,7 +25,7 @@
 /**
  * @brief Dummy test driver.
  */
-int main2(int argc, const char *argv[])
+int __main2(int argc, const char *argv[])
 {
 	((void) argc);
 	((void) argv);
