@@ -44,7 +44,7 @@
 				(void) _nanvix_assertfail("assertion failed: %s, file %s, line %d\n",\
 										#cond, __FILE__, __LINE__ ))
 	#else
-		#define nanvix_assert(cond) ((cond))
+		#define nanvix_assert(cond) ((void)(cond))
 	#endif
 
 	/* Forward definitions. */
