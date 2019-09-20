@@ -23,7 +23,7 @@
  */
 
 #include <ulibc/stdio.h>
-#include <stdarg.h>
+#include <posix/stdarg.h>
 #include "stdio.h"
 
 /**

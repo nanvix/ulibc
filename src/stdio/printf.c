@@ -23,7 +23,7 @@
  */
 
 #include <ulibc/stdio.h>
-#include <stdarg.h>
+#include <posix/stdarg.h>
 
 /*
  * Writes a formated string to the standard output file.

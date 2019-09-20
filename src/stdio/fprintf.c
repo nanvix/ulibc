@@ -23,7 +23,7 @@
  */
 
 #include <ulibc/stdio.h>
-#include <stdarg.h>
+#include <posix/stdarg.h>
 
 /**
  * @todo TODO: provide a detailed description for this function.

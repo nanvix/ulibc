@@ -29,7 +29,7 @@
 /*
  * Main routine.
  */
-extern int main2(int argc, const char *argv[]);
+extern int __main2(int argc, const char *argv[]);
 
 /**
  * @brief Environment variables.
@@ -46,11 +46,16 @@ void ___start(int argc, const char *argv[], char **envp)
 	static char stderr_buffer[NANVIX_BUFSIZ];
 
 	nanvix_setvbuf(nanvix_stdout, stdout_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
-	nanvix_setvbuf(nanvix_stdout, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
+	nanvix_setvbuf(nanvix_stderr, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
 
 	environ = envp;
 
-	ret = main2(argc, argv);
+	ret = __main2(argc, argv);
 
-	___nanvix_exit(ret);
+	/* Power off. */
+	if (cluster_get_num() == PROCESSOR_CLUSTERNUM_MASTER)
+		___nanvix_exit(ret);
+
+	/* Loop forever. */
+	UNREACHABLE();
 }

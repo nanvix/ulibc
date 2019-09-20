@@ -25,9 +25,10 @@
 #ifndef ULIBC_GLUE_H_
 #define ULIBC_GLUE_H_
 
+	#include <nanvix/const.h>
+	#include <nanvix/sys/thread.h>
 	#include <sys/types.h>
 	#include <stddef.h>
-	#include <nanvix.h>
 
 	/**
 	 * @name File Offsets
