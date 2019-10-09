@@ -98,3 +98,18 @@ ssize_t __nanvix_write(int fd, const void *buf, size_t n)
 {
 	return (nanvix_write(fd, buf, n));
 }
+
+#ifdef __mppa256__
+
+/**
+ * @brief Stub main().
+ */
+int main(int argc, const char *argv[])
+{
+	UNUSED(argc);
+	UNUSED(argv);
+
+	return (0);
+}
+
+#endif /* __mppa256__ */
