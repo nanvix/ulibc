@@ -311,12 +311,6 @@
  * Integer Arithmetic Functions                                               *
  *============================================================================*/
 
-#if defined(__mppa256__)
-
-	#include <ulibc/glue.h>
-
-#else
-
 	/**
 	 * @brief Structure type returned by the div() function.
 	 */
@@ -347,8 +341,6 @@
 	} nanvix_lldiv_t;
 
 #endif /* __STRICT_ANSI__ */
-
-#endif
 
 	/**
 	 * @brief Returns an integer absolute value.
