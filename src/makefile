@@ -50,10 +50,10 @@ OBJ += $(SRC:.c=.$(OBJ_SUFFIX).o)
 # Builds All Object Files
 all: $(OBJ)
 ifeq ($(VERBOSE), no)
-	@echo [AR] $(LIBNAME).a
-	@$(AR) $(ARFLAGS) $(LIBDIR)/$(LIBNAME).a $(OBJ)
+	@echo [AR] $(LIBC)
+	@$(AR) $(ARFLAGS) $(LIBC) $(OBJ)
 else
-	$(AR) $(ARFLAGS) $(LIBDIR)/$(LIBNAME).a $(OBJ)
+	$(AR) $(ARFLAGS) $(LIBC) $(OBJ)
 endif
 
 # Cleans All Object Files
@@ -68,10 +68,10 @@ endif
 # Cleans Everything
 distclean: clean
 ifeq ($(VERBOSE), no)
-	@echo [CLEAN] $(LIBNAME).a
-	@rm -rf $(LIBDIR)/$(LIBNAME).a
+	@echo [CLEAN] $(LIBC)
+	@rm -rf $(LIBC)
 else
-	rm -rf $(LIBDIR)/$(LIBNAME).a
+	rm -rf $(LIBC)
 endif
 
 # Builds a C Source file

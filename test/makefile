@@ -31,7 +31,7 @@ LIBS  = -Wl,--whole-archive $(LIBC) $(LIBNANVIX) $(LIBKERNEL) $(LIBHAL) $(LIBLWI
 LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
 
 #===============================================================================
-# Sources and Objects
+# Sources, Objects & Binaries
 #===============================================================================
 
 # C Source Files
@@ -39,6 +39,9 @@ SRC = $(wildcard *.c)
 
 # Object Files
 OBJ = $(SRC:.c=.$(OBJ_SUFFIX).o)
+
+# Binary File
+EXEC = test-driver.$(OBJ_SUFFIX)
 
 #===============================================================================
 # Sources (Target Specific)
