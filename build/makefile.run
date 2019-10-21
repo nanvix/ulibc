@@ -38,7 +38,7 @@ run-ccluster:
 test:
 	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) all --no-debug $(TIMEOUT)
 
-# Runs Unit Tests in Compute Cluster with a timout
+# Runs Unit Tests in Compute Cluster with a timeout.
 test-ccluster:
 	bash $(TOOLSDIR)/nanvix-run.sh $(IMAGE) $(BINDIR) $(TARGET) ccluster --no-debug $(TIMEOUT)
 

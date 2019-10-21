@@ -35,7 +35,7 @@
 export VERBOSE ?= no
 
 # Release Version?
-export RELEASE ?= false
+export RELEASE ?= no
 
 # Installation Prefix
 export PREFIX ?= $(HOME)
@@ -44,20 +44,17 @@ export PREFIX ?= $(HOME)
 # Directories
 #===============================================================================
 
-.PHONY: test
-
-# Directories
 export ROOTDIR    := $(CURDIR)
 export BINDIR     := $(ROOTDIR)/bin
 export BUILDDIR   := $(ROOTDIR)/build
 export CONTRIBDIR := $(ROOTDIR)/contrib
+export DOCDIR     := $(ROOTDIR)/doc
+export IMGDIR     := $(ROOTDIR)/img
+export INCDIR     := $(ROOTDIR)/include
+export LIBDIR     := $(ROOTDIR)/lib
 export LINKERDIR  := $(BUILDDIR)/$(TARGET)/linker
 export MAKEDIR    := $(BUILDDIR)/$(TARGET)/make
-export INCDIR     := $(ROOTDIR)/include
-export IMGDIR     := $(ROOTDIR)/img
-export LIBDIR     := $(ROOTDIR)/lib
 export SRCDIR     := $(ROOTDIR)/src
-export TESTDIR    := $(ROOTDIR)/test
 export TOOLSDIR   := $(ROOTDIR)/utils
 
 #===============================================================================
@@ -65,10 +62,14 @@ export TOOLSDIR   := $(ROOTDIR)/utils
 #===============================================================================
 
 # Libraries
-export LIBHAL    = $(LIBDIR)/libhal-$(TARGET).a
-export LIBKERNEL = $(LIBDIR)/libkernel-$(TARGET).a
-export LIBNANVIX = $(LIBDIR)/libnanvix-$(TARGET).a
-export LIBC      = $(LIBDIR)/libc-$(TARGET).a
+export KLIB      := klib-$(TARGET).a
+export LIBHAL    := libhal-$(TARGET).a
+export LIBKERNEL := libkernel-$(TARGET).a
+export LIBNANVIX := libnanvix-$(TARGET).a
+export LIBC      := libc-$(TARGET).a
+
+# Binaries
+export EXEC := test-driver.$(TARGET)
 
 #===============================================================================
 # Target-Specific Make Rules
@@ -82,14 +83,15 @@ include $(MAKEDIR)/makefile
 
 # Compiler Options
 export CFLAGS += -std=c99 -fno-builtin
-export CFLAGS += -pedantic-errors
 export CFLAGS += -Wall -Wextra -Werror -Wa,--warn
 export CFLAGS += -Winit-self -Wswitch-default -Wfloat-equal
 export CFLAGS += -Wundef -Wshadow -Wuninitialized -Wlogical-op
-export CFLAGS += -Wno-unused-function
-export CFLAGS += -fno-stack-protector
 export CFLAGS += -Wvla # -Wredundant-decls
+export CFLAGS += -Wno-missing-profile
+export CFLAGS += -fno-stack-protector
+export CFLAGS += -Wno-unused-function
 export CFLAGS += -I $(INCDIR)
+export CFLAGS += -I $(ROOTDIR)/src/lwip/src/include
 
 # Additional C Flags
 include $(BUILDDIR)/makefile.cflags
@@ -105,21 +107,24 @@ export IMGSRC = $(IMGDIR)/$(TARGET).img
 # Image Name
 export IMAGE = ulibc-debug.img
 
-# Builds Everything
-all: image-tests
+# Builds everything.
+all: | make-dirs image
 
 # Make Directories
 make-dirs:
-	@mkdir -p $(LIBDIR) $(BINDIR)
+	@mkdir -p $(BINDIR)
+	@mkdir -p $(LIBDIR)
 
-image-tests: | make-dirs all-target
-	bash $(TOOLSDIR)/nanvix-build-image.sh $(IMAGE) $(BINDIR) $(IMGSRC)
+# Builds image.
+image: all-target
+	@bash $(TOOLSDIR)/nanvix-build-image.sh $(IMAGE) $(BINDIR) $(IMGSRC)
 
-# Cleans builds.
+# Cleans build.
 clean: clean-target
 
 # Cleans everything.
 distclean: distclean-target
+	@rm -rf $(IMAGE) $(BINDIR)/$(EXECBIN) $(LIBDIR)/$(LIBC)
 
 #===============================================================================
 # Contrib Install and Uninstall Rules

@@ -23,14 +23,6 @@
 #
 
 #===============================================================================
-# Toolchain Configuration
-#===============================================================================
-
-# Libraries
-export LIBS  = -Wl,--whole-archive $(LIBNANVIX) $(LIBKERNEL) $(LIBHAL)
-export LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
-
-#===============================================================================
 # Sources, Objects and Binary
 #===============================================================================
 
@@ -42,21 +34,24 @@ SRC += $(wildcard string/*.c)
 SRC += $(wildcard stdlib/*.c)
 SRC += $(wildcard stdio/*.c)
 
+#===============================================================================
 # Object Files
-OBJ += $(SRC:.c=.$(OBJ_SUFFIX).o)
+#===============================================================================
+
+OBJ = $(SRC:.c=.$(OBJ_SUFFIX).o)
 
 #===============================================================================
 
-# Builds All Object Files
+# Builds all object files.
 all: $(OBJ)
 ifeq ($(VERBOSE), no)
 	@echo [AR] $(LIBC)
-	@$(AR) $(ARFLAGS) $(LIBC) $(OBJ)
+	@$(AR) $(ARFLAGS) $(LIBDIR)/$(LIBC) $(OBJ)
 else
-	$(AR) $(ARFLAGS) $(LIBC) $(OBJ)
+	$(AR) $(ARFLAGS) $(LIBDIR)/$(LIBC) $(OBJ)
 endif
 
-# Cleans All Object Files
+# Cleans all object files.
 clean:
 ifeq ($(VERBOSE), no)
 	@echo [CLEAN] $(OBJ)
@@ -65,16 +60,16 @@ else
 	rm -rf $(OBJ)
 endif
 
-# Cleans Everything
+# Cleans everything.
 distclean: clean
 ifeq ($(VERBOSE), no)
 	@echo [CLEAN] $(LIBC)
-	@rm -rf $(LIBC)
+	@rm -rf $(LIBDIR)/$(LIBC)
 else
-	rm -rf $(LIBC)
+	rm -rf $(LIBDIR)/$(LIBC)
 endif
 
-# Builds a C Source file
+# Builds a C source file.
 %.$(OBJ_SUFFIX).o: %.c
 ifeq ($(VERBOSE), no)
 	@echo [CC] $@

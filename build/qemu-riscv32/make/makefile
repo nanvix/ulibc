@@ -26,7 +26,12 @@
 # Target Configuration
 #===============================================================================
 
-export CFLAGS  = -D __qemu_riscv32__    # Target
+export TARGET    ?= qemu-riscv32
+export PROCESSOR := riscv32
+export CLUSTER   := riscv32-cluster
+export CORE      := rv32gc
+
+export CFLAGS := -D __qemu_riscv32__    # Target
 export CFLAGS += -D __riscv32__         # Processor
 export CFLAGS += -D __riscv32_cluster__ # Cluster
 export CFLAGS += -D __rv32gc__          # Core
@@ -39,51 +44,47 @@ export CFLAGS += -D __rv32gc__          # Core
 export TOOLCHAIN_DIR ?= $(TOOLSDIR)/toolchain/riscv32/bin
 
 # Toolchain
-export CC = $(TOOLCHAIN_DIR)/riscv32-elf-gcc
-export LD = $(TOOLCHAIN_DIR)/riscv32-elf-ld
-export AR = $(TOOLCHAIN_DIR)/riscv32-elf-ar
+export CC := $(TOOLCHAIN_DIR)/riscv32-elf-gcc
+export LD := $(TOOLCHAIN_DIR)/riscv32-elf-ld
+export AR := $(TOOLCHAIN_DIR)/riscv32-elf-ar
 
 # Timeout Variable
 export TIMEOUT ?= 120
 
 # Compiler Options
-export CFAGS  += -march=rv32imac -mabi=ilp32 -mcmodel=medany
+export CFLAGS += -march=rv32imac -mabi=ilp32 -mcmodel=medany
+export CFLAGS += -ffunction-sections -fdata-sections
 export CFLAGS += -nostdlib -nostdinc -ffreestanding
 export CFLAGS += -ansi -pedantic-errors
 export CFLAGS += -Wstack-usage=4096
-export CFLAGS += -ffunction-sections -fdata-sections
 export CFLAGS += -Wno-error=type-limits
 export CFLAGS += -D __HAS_HW_DIVISION
-export CFLAGS += -I $(INCDIR)/posix
 
 # Linker Options
-export LDFLAGS += -nostdlib -nostdinc -ffreestanding
-export LDFLAGS += -march=rv32imac -mabi=ilp32 -mcmodel=medany
+export LDFLAGS := -march=rv32imac -mabi=ilp32 -mcmodel=medany
 export LDFLAGS += -Wl,--nmagic -Wl,--gc-sections
+export LDFLAGS += -nostdlib -nostdinc -ffreestanding
 
 # Suffix for Objects
-export OBJ_SUFFIX=qemu-riscv32
+export OBJ_SUFFIX := qemu-riscv32
 
 #===============================================================================
 # Libraries
 #===============================================================================
 
 export THEIR_LIBS := -lgcc
-export LIBLWIP =
+export LIBLWIP :=
 
 #===============================================================================
 
 # Builds everything.
-all-target:
+all-target: make-dirs
 	@$(MAKE) -C $(SRCDIR) all
-	@$(MAKE) -C $(TESTDIR) all
 
 # Cleans object files.
 clean-target:
 	@$(MAKE) -C $(SRCDIR) clean
-	@$(MAKE) -C $(TESTDIR) clean
 
 # Cleans everything.
 distclean-target:
 	@$(MAKE) -C $(SRCDIR) distclean
-	@$(MAKE) -C $(TESTDIR) distclean
