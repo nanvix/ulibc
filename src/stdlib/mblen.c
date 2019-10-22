@@ -44,7 +44,7 @@
  */
 
 #include <ulibc/stdlib.h>
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * If @p s is not a null pointer, the mblen() function determines the

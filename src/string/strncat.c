@@ -55,7 +55,7 @@
  * SUCH DAMAGE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The strncat() function appends not more than @p n characters (a

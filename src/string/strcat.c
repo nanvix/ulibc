@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The strcat() function appends a copy of the string pointed to by @p

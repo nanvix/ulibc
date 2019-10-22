@@ -55,7 +55,7 @@
  * SUCH DAMAGE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The memmove() function copies @p n characters from the object

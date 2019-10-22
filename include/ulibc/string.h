@@ -25,7 +25,7 @@
 #ifndef ULIBC_STRING_H_
 #define ULIBC_STRING_H_
 
-	#include <stddef.h>
+	#include <posix/stddef.h>
 
 /*============================================================================*
  * Copying Functions                                                          *

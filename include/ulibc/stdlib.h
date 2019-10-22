@@ -25,7 +25,7 @@
 #ifndef ULIBC_STDLIB_H_
 #define ULIBC_STDLIB_H_
 
-	#include <stddef.h>
+	#include <posix/stddef.h>
 
 /*============================================================================*
  * String Conversion Functions                                                *

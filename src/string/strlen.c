@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The strlen() function computes the length of the string pointed to

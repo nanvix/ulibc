@@ -24,7 +24,7 @@
 
 #include <nanvix/sys/dev.h>
 #include <nanvix/sys/thread.h>
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * @brief Heap size (in bytes).

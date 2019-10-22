@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The strncpy() function copies not more than @p n characters

@@ -55,7 +55,7 @@
  * SUCH DAMAGE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The bsearch() function searches an array of @p nmemb objects, the

@@ -27,8 +27,8 @@
 
 	#include <nanvix/const.h>
 	#include <nanvix/sys/thread.h>
-	#include <sys/types.h>
-	#include <stddef.h>
+	#include <posix/sys/types.h>
+	#include <posix/stddef.h>
 
 	/**
 	 * @name File Offsets

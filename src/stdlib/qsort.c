@@ -57,7 +57,7 @@
 
 #include <ulibc/string.h>
 #include <ulibc/stdlib.h>
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * @brief Compare function.

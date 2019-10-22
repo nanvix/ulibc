@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The memchr() function locates the first occurrence of @p c

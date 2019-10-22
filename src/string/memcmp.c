@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The memcmp() function compares the first @p n characters of the

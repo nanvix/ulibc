@@ -26,7 +26,7 @@
 #define ULIBC_STDIO_H_
 
 	#include <posix/stdarg.h>
-	#include <stddef.h>
+	#include <posix/stddef.h>
 
 	/**
 	 * @brief maximum number of opened file stream.
