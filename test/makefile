@@ -26,31 +26,35 @@
 # Toolchain Configuration 
 #===============================================================================
 
+# Compiler Options
+ifneq ($(LIBLWIP),)
+CFLAGS += -I $(INCDIR)/posix
+endif
+
 # Libraries
-LIBS  = -Wl,--whole-archive $(LIBC) $(LIBNANVIX) $(LIBKERNEL) $(LIBHAL) $(LIBLWIP)
-LIBS += -Wl,--no-whole-archive $(THEIR_LIBS)
+LIBS := -Wl,--whole-archive
+LIBS += $(LIBDIR)/$(LIBHAL)
+LIBS += -Wl,--no-whole-archive
+LIBS += $(LIBDIR)/$(LIBC)
+LIBS += $(LIBDIR)/$(LIBNANVIX)
+LIBS += $(LIBDIR)/$(LIBKERNEL)
+ifneq ($(LIBLWIP),)
+LIBS += $(LIBDIR)/$(LIBLWIP)
+endif
+LIBS += $(LIBDIR)/$(KLIB) $(THEIR_LIBS)
 
 #===============================================================================
-# Sources and Objects
+# Sources
 #===============================================================================
 
 # C Source Files
 SRC = $(wildcard *.c)
 
+#===============================================================================
 # Object Files
+#===============================================================================
+
 OBJ = $(SRC:.c=.$(OBJ_SUFFIX).o)
-
-#===============================================================================
-# Sources (Target Specific)
-#===============================================================================
-
-ifeq ($(TARGET),qemu-x86)
-SRC += $(wildcard lwip/*.c)
-endif
-
-ifeq ($(TARGET),qemu-openrisc)
-SRC += $(wildcard lwip/*.c)
-endif
 
 #===============================================================================
 
@@ -63,7 +67,7 @@ endif
 # Builds All Object Files
 all: $(OBJ)
 ifeq ($(VERBOSE), no)
-	@echo [CC] $(BINDIR)/$(EXEC)
+	@echo [CC] $(EXEC)
 	@$(CC) $(LDFLAGS) $(LINKER_SCRIPT) -o $(BINDIR)/$(EXEC) $(OBJ) $(LIBS)
 else
 	$(CC) $(LDFLAGS) $(LINKER_SCRIPT) -o $(BINDIR)/$(EXEC) $(OBJ) $(LIBS)
@@ -81,13 +85,13 @@ endif
 # Cleans Everything
 distclean: clean
 ifeq ($(VERBOSE), no)
-	@echo [CLEAN] $(BINDIR)/$(EXEC)
+	@echo [CLEAN] $(EXEC)
 	@rm -rf $(BINDIR)/$(EXEC)
 else
 	rm -rf $(BINDIR)/$(EXEC)
 endif
 
-# Builds a C Source file
+# Builds a C source file.
 %.$(OBJ_SUFFIX).o: %.c
 ifeq ($(VERBOSE), no)
 	@echo [CC] $@

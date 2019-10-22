@@ -55,7 +55,7 @@
  * SUCH DAMAGE.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The strstr() function locates the first occurrence in the string

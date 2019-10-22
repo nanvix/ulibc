@@ -37,17 +37,18 @@ export ARTIFACTS := $(shell find $(INCDIR) -name *.h -type f)
 
 #===============================================================================
 
-# Install Everything
+# Install
 install: | all-target install-headers
-	@mkdir -p $(PREFIX)/lib
-	@cp -f $(LIBDIR)/libhal*.a $(PREFIX)/lib
-	@echo [CP] $(LIBDIR)/libhal*.a
-	@cp -f $(LIBDIR)/libkernel*.a $(PREFIX)/lib
-	@echo [CP] $(LIBDIR)/libkernel*.a
+	@cp -f $(LIBDIR)/klib*.a $(LIBDIR)/libhal*.a $(PREFIX)/lib
+	@cp -f $(LIBDIR)/libkernel*.a $(LIBDIR)/liblwip*.a $(PREFIX)/lib 2>/dev/null || :
 	@cp -f $(LIBDIR)/libnanvix*.a $(PREFIX)/lib
-	@echo [CP] $(LIBDIR)/libnanvix*.a
 	@cp -f $(LIBDIR)/libc*.a $(PREFIX)/lib
-	@echo [CP] $(LIBDIR)/libc*.a
+	@echo [CP] $(PREFIX)/lib/klib*.a
+	@echo [CP] $(PREFIX)/lib/libhal*.a
+	@echo [CP] $(PREFIX)/lib/libkernel*.a
+	@echo [CP] $(PREFIX)/lib/liblwip*.a
+	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@echo [RM] $(PREFIX)/lib/libc*.a
 	@echo "==============================================================================="
 	@echo "Nanvix uLibc Successfully Installed"
 	@echo "==============================================================================="
@@ -58,15 +59,17 @@ install-headers: copy-artifacts
 	@echo "Nanvix uLibc Headers Successfully Installed"
 	@echo "==============================================================================="
 
-# Uninstall Everything
+# Uninstall
 uninstall: | distclean uninstall-headers
-	@rm -f $(PREFIX)/lib/libhal*.a
-	@echo [RM] $(PREFIX)/lib/libhal*.a
-	@rm -f $(PREFIX)/lib/libkernel*.a
-	@echo [RM] $(PREFIX)/lib/libkernel*.a
-	@rm -f $(PREFIX)/lib/libnanvix*.a
-	@echo [RM] $(PREFIX)/lib/libnanvix*.a
+	@rm -f $(PREFIX)/lib/klib*.a $(PREFIX)/lib/libhal*.a
+	@rm -f $(PREFIX)/lib/libkernel*.a $(LIBDIR)/liblwip.*a
+	@rm -f $(LIBDIR)/libnanvix.*a
 	@rm -f $(PREFIX)/lib/libc*.a
+	@echo [RM] $(PREFIX)/lib/klib*.a
+	@echo [RM] $(PREFIX)/lib/libhal*.a
+	@echo [RM] $(PREFIX)/lib/libkernel*.a
+	@echo [RM] $(PREFIX)/lib/liblwip*.a
+	@echo [RM] $(PREFIX)/lib/libnanvix*.a
 	@echo [RM] $(PREFIX)/lib/libc*.a
 	@echo "==============================================================================="
 	@echo "Nanvix uLibc Successfully Uninstalled"

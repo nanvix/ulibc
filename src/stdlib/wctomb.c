@@ -43,7 +43,7 @@
  * MA 02110-1301, USA.
  */
 
-#include <stddef.h>
+#include <posix/stddef.h>
 
 /**
  * The wctomb() function determines the number of bytes needed to

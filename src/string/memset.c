@@ -28,7 +28,7 @@
  * @brief memset() implementation.
  */
 
-#include <sys/types.h>
+#include <posix/sys/types.h>
 
 /**
  * The memset() function copies the value of @p c (converted to an

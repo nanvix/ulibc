@@ -24,7 +24,7 @@
 
 #include <ulibc/string.h>
 #include <ulibc/glue.h>
-#include <stddef.h>
+#include <posix/stddef.h>
 #include <posix/errno.h>
 
 /**

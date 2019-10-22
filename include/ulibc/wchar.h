@@ -25,7 +25,7 @@
 #ifndef ULIBC_WCHAR_H_
 #define ULIBC_WCHAR_H_
 
-	#include <stddef.h>
+	#include <posix/stddef.h>
 
 	 /**
 	  * @brief Stores any valid value of wchar_t or WEOF.

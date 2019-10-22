@@ -44,7 +44,7 @@
  */
 
 #include <ulibc/wchar.h>
-#include <stddef.h>
+#include <posix/stddef.h>
 #include <posix/errno.h>
 
 /**
