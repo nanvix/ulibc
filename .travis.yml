@@ -37,19 +37,37 @@ jobs:
   include:
     # Build Debug
     - stage: "Build Debug"
+      name: "QEMU OpenRISC"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-openrisc /bin/bash -l -c "cd /mnt && make contrib && make all"
+    - stage: "Build Debug"
+      name: "QEMU x86"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-x86      /bin/bash -l -c "cd /mnt && make contrib && make all"
+    - stage: "Build Debug"
       name: "QEMU RISC-V 32-bit"
       script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-riscv32  /bin/bash -l -c "cd /mnt && make contrib && make all"
     - stage: "Build Debug"
       name: "Unix 64-bit"
       script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:unix64        /bin/bash -l -c "cd /mnt && make contrib && make all"
+    - stage: "Build Debug"
+      name: "OpTiMSoC"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-openrisc /bin/bash -l -c "cd /mnt && export TARGET=optimsoc && make contrib && make all"
 
     # Build Release
+    - stage: "Build Release"
+      name: "QEMU OpenRISC"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-openrisc /bin/bash -l -c "cd /mnt && export RELEASE=true && make contrib && make all"
+    - stage: "Build Release"
+      name: "QEMU x86"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-x86      /bin/bash -l -c "cd /mnt && export RELEASE=true && make contrib && make all"
     - stage: "Build Release"
       name: "QEMU RISC-V 32-bit"
       script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-riscv32  /bin/bash -l -c "cd /mnt && export RELEASE=true && make contrib && make all"
     - stage: "Build Release"
       name: "Unix 64-bit"
       script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:unix64        /bin/bash -l -c "cd /mnt && export RELEASE=true && make contrib && make all"
+    - stage: "Build Release"
+      name: "OpTiMSoC"
+      script: docker run -v "$(pwd):/mnt" -p 4567:4567 nanvix/ubuntu:qemu-openrisc /bin/bash -l -c "cd /mnt && export TARGET=optimsoc && export RELEASE=true && make contrib && make all"
 
 notifications:
   slack: nanvix:31ePVjsrXynUajPUDqy6I0hp
