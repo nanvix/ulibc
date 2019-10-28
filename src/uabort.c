@@ -27,7 +27,7 @@
 /**
  * The uabort() function causes abnormal termination to occur.
  */
-void nanvix_abort(void)
+void uabort(void)
 {
 	___nanvix_exit(0);
 }
