@@ -24,61 +24,8 @@
 
 #include <nanvix/sys/dev.h>
 #include <nanvix/sys/thread.h>
+	#include <posix/sys/types.h>
 #include <posix/stddef.h>
-
-/**
- * @brief Heap size (in bytes).
- */
-#define HEAP_SIZE (512*1024)
-
-/**
- * @brief Heap.
- */
-static struct
-{
-	unsigned char *brk;
-	unsigned char data[HEAP_SIZE];
-} heap = {
-	NULL, {0, }
-};
-
-/**
- * The sbrk() function changes the breakpoint value of the calling process to
- * @p size bytes ahead from the current value.
- */
-void *__nanvix_sbrk(size_t size)
-{
-	unsigned char *ptr;
-	unsigned char *brk;
-
-	/* Initialize heap. */
-	if (heap.brk == NULL)
-		heap.brk = heap.data;
-
-	ptr = brk = heap.brk;
-
-	brk += size;
-
-	/* Cannot increase break value. */
-	if ((brk < heap.data) || (brk >= (heap.data + HEAP_SIZE)))
-		return ((void *) -1);
-
-	heap.brk = brk;
-
-	return (ptr);
-}
-
-/**
- * @brief Stub lseek() function.
- */
-off_t __nanvix_lseek(int fildes, off_t offset, int whence)
-{
-	UNUSED(fildes);
-	UNUSED(offset);
-	UNUSED(whence);
-
-	return (0);
-}
 
 /**
  *  Terminates the calling process.
