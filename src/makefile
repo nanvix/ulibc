@@ -28,11 +28,6 @@
 
 # C Source Files
 SRC += $(wildcard *.c)
-SRC += $(wildcard assert/*.c)
-SRC += $(wildcard ctype/*.c)
-SRC += $(wildcard string/*.c)
-SRC += $(wildcard stdlib/*.c)
-SRC += $(wildcard stdio/*.c)
 
 #===============================================================================
 # Object Files

@@ -22,20 +22,12 @@
  * SOFTWARE.
  */
 
-#include <ulibc/stdio.h>
-#include <posix/stdarg.h>
+#include <nanvix/ulib.h>
 
-/*
- * Writes a formated string to the standard output file.
+/**
+ * The uabort() function causes abnormal termination to occur.
  */
-int nanvix_printf(const char *format, ...)
+void nanvix_abort(void)
 {
-	int n;        /* Characters written. */
-	va_list args; /* Arguments.          */
-
-	va_start(args, format);
-	n = nanvix_vfprintf(nanvix_stdout, format, args);
-	va_end(args);
-
-	return (n);
+	___nanvix_exit(0);
 }

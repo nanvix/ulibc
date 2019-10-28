@@ -79,7 +79,7 @@ all-k1bdp:
 		LIBNAVNIX=libnanvix-k1bdp.a                    \
 		LIBKERNEL=libkernel-k1bdp.a                    \
 		LIBHAL=libhal-k1bdp.a                          \
-		KLIB=klib-k1bdp.a                              \
+		BARELIB=barelib-k1bdp.a                        \
 		OBJ_SUFFIX=k1bdp                               \
 		EXEC=test-driver.k1bdp
 
@@ -93,7 +93,7 @@ all-k1bio:
 		LIBNANVIX=libnanvix-k1bio.a                     \
 		LIBKERNEL=libkernel-k1bio.a                     \
 		LIBHAL=libhal-k1bio.a                           \
-		KLIB=klib-k1bio.a                               \
+		BARELIB=barelib-k1bio.a                         \
 		EXEC=test-driver.k1bio                          \
 		OBJ_SUFFIX=k1bio
 
@@ -120,6 +120,7 @@ distclean-k1bdp: clean-k1bdp
 		LIBNANVIX=libnanvix-k1bdp.a \
 		LIBKERNEL=libkernel-k1bdp.a \
 		LIBHAL=libhal-k1bdp.a       \
+		BARELIB=barelib-k1bdp.a     \
 		OBJ_SUFFIX=k1bdp            \
 		EXEC=test-driver.k1bdp
 
@@ -130,5 +131,6 @@ distclean-k1bio: clean-k1bio
 		LIBNANVIX=libnanvix-k1bio.a \
 		LIBKERNEL=libkernel-k1bio.a \
 		LIBHAL=libhal-k1bio.a       \
+		BARELIB=barelib-k1bio.a     \
 		OBJ_SUFFIX=k1bio            \
 		EXEC=test-driver.k1bio

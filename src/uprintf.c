@@ -22,23 +22,26 @@
  * SOFTWARE.
  */
 
-#include "rand.h"
+#include <nanvix/sys/dev.h>
+#include <posix/stdarg.h>
+#include <nanvix/ulib.h>
 
 /**
- * Next pseudo-random number if the sequence.
+ * @todo: TODO provide a detailed description for this function.
  */
-unsigned _next = 1;
-
-/**
- * The srand() function uses the argument as a @p seed for a new
- * sequence of pseudo-random numbers to be returned by subsequent
- * calls to rand.  If srand() is then called with the same @p seed
- * value, the sequence of pseudo-random numbers shall be repeated. If
- * rand is called before any calls to srand have been made, the same
- * sequence shall be generated as when srand() is first called with a
- * @p seed value of 1.
- */
-void nanvix_srand(unsigned seed)
+int uprintf(const char *fmt, ...)
 {
-	_next = seed;
+	size_t len;       /* String length.           */
+	va_list args;     /* Variable arguments list. */
+	char buffer[128]; /* Temporary buffer.        */
+
+	/* Convert to raw string. */
+	va_start(args, fmt);
+	len = uvsprintf(buffer, fmt, args);
+	buffer[len++] = '\0';
+	va_end(args);
+
+	nanvix_write(0, buffer, ustrlen(buffer));
+
+	return (len);
 }

@@ -58,11 +58,11 @@
 #include <posix/errno.h>
 
 /**
- * The strerror() function maps the number in @p errnum to a message
+ * The ustrerror() function maps the number in @p errnum to a message
  * string. Typically, the values for errnum come from @p errno, but
  * strerror() shall map any value of type int to a message.
  */
-char *nanvix_strerror(int errnum)
+char *ustrerror(int errnum)
 {
 	char *error;
 

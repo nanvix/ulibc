@@ -25,24 +25,24 @@
 #include <posix/stddef.h>
 
 /**
- * The memchr() function locates the first occurrence of @p c
- * (converted to an unsigned char) in the initial @p n characters
- * (each interpreted as unsigned char) of the object pointed to by @p
- * s.
+ * The umemcmp() function compares the first @p n characters of the
+ * object pointed to by @p s1 to the first @p n characters of the
+ * object pointed to by @p s2)
  */
-void *nanvix_memchr(const void *s, int c, size_t n)
+int umemcmp(const void *s1, const void *s2, size_t n)
 {
-	const unsigned char *p;
+	const unsigned char *p1;
+	const unsigned char *p2;
 
-	p = s;
+	p1 = s1;
+	p2 = s2;
 
-	/* Search byte. */
 	while (n-- > 0)
 	{
-		if (*p++ == c)
-			return ((void *)(p - 1));
+		if (*p1++ != *p2++)
+			return (*--p1 - *--p2);
 	}
 
-	return (NULL);
+	return (0);
 }
 

@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-#include <ulibc/glue.h>
-#include <ulibc/stdio.h>
+#include <nanvix/ulib.h>
 #include <posix/stddef.h>
+#include <nanvix/sys/thread.h>
 
 /*
  * Main routine.
@@ -42,11 +42,6 @@ char **environ = NULL;
 void ___start(int argc, const char *argv[], char **envp)
 {
 	int ret;
-	static char stdout_buffer[NANVIX_BUFSIZ];
-	static char stderr_buffer[NANVIX_BUFSIZ];
-
-	nanvix_setvbuf(nanvix_stdout, stdout_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
-	nanvix_setvbuf(nanvix_stderr, stderr_buffer, _NANVIX_IOLBF, NANVIX_BUFSIZ);
 
 	environ = envp;
 
