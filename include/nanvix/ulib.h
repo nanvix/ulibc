@@ -208,6 +208,7 @@
  * @ingroup ulib
  */
 /**@{*/
+
 	/**
 	 * @brief Asserts a condition.
 	 *
@@ -249,6 +250,43 @@
 	 * @returns The number of characters written to the output device.
 	 */
 	extern int uprintf(const char * restrict fmt, ...);
+
+/**@}*/
+
+/*============================================================================*
+ * Random Numbers                                                             *
+ *============================================================================*/
+
+/**
+ * @addtogroup ulib-random Random Number Generator
+ * @ingroup ulib
+ */
+/**@{*/
+
+	/**
+	 * @brief Initializes the pseudo-random number generator.
+	 *
+	 * @param seed Seed for pseudo-random number generator.
+	 */
+	extern void usrand(unsigned seed);
+
+	/**
+	 * @brief Generates a pseudo-random number.
+	 *
+	 * @returns A pseudo-random number.
+	 */
+	extern int urand(void);
+
+	/**
+	 * @brief Generates a pseudo-random number.
+	 *
+	 * @param state State of the pseudo-random number.
+	 *
+	 * @returns A pseudo-random number.
+	 *
+	 * @note This function is re-entrant.
+	 */
+	extern int urand_r(unsigned *state);
 
 /**@}*/
 
