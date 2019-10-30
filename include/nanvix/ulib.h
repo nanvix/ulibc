@@ -69,6 +69,11 @@
 	#define umemchr(s,c,n) __memchr(s,c,n)
 
 	/**
+	 * @see __memcmp().
+	 */
+	#define umemcmp(s1,s2,n) __memcmp(s1,s2,n)
+
+	/**
 	 * @see __memcpy().
 	 */
 	#define umemcpy(s1,s2,n) __memcpy(s1,s2,n)
