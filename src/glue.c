@@ -30,11 +30,13 @@
 /**
  *  Terminates the calling process.
  */
-NORETURN  void ___nanvix_exit(int status)
+NORETURN void ___nanvix_exit(int status)
 {
-	((void) status);
+	if (kthread_self() == 1)
+		_kexit(status);
+	else
+		kthread_exit(&status);
 
-	kshutdown();
 	UNREACHABLE();
 }
 

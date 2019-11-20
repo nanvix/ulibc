@@ -47,9 +47,7 @@ void ___start(int argc, const char *argv[], char **envp)
 
 	ret = __main2(argc, argv);
 
-	/* Power off. */
-	if (cluster_get_num() == PROCESSOR_CLUSTERNUM_MASTER)
-		___nanvix_exit(ret);
+	___nanvix_exit(ret);
 
 	/* Loop forever. */
 	UNREACHABLE();
