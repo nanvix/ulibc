@@ -62,8 +62,8 @@ install-headers: copy-artifacts
 # Uninstall
 uninstall: | distclean uninstall-headers
 	@rm -f $(PREFIX)/lib/barelib*.a $(PREFIX)/lib/libhal*.a
-	@rm -f $(PREFIX)/lib/libkernel*.a $(LIBDIR)/liblwip.*a
-	@rm -f $(LIBDIR)/libnanvix.*a
+	@rm -f $(PREFIX)/lib/libkernel*.a $(PREFIX)/lib/liblwip*.a
+	@rm -f $(PREFIX)/lib/libnanvix*.a
 	@rm -f $(PREFIX)/lib/libc*.a
 	@echo [RM] $(PREFIX)/lib/barelib*.a
 	@echo [RM] $(PREFIX)/lib/libhal*.a
