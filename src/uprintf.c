@@ -33,7 +33,7 @@ int uprintf(const char *fmt, ...)
 {
 	size_t len;       /* String length.           */
 	va_list args;     /* Variable arguments list. */
-	char buffer[128]; /* Temporary buffer.        */
+	char buffer[256]; /* Temporary buffer.        */
 
 	/* Convert to raw string. */
 	va_start(args, fmt);
