@@ -36,6 +36,7 @@ include/machine/
 include/nanvix/hal/
 include/nanvix/cc.h
 include/nanvix/const.h
+include/nanvix/hal.h
 include/nanvix/hlib.h
 include/posix/
 
