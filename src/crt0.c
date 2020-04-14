@@ -27,7 +27,7 @@
 #include <nanvix/sys/thread.h>
 
 /*
- * Main routine.
+ * System-level main routine.
  */
 extern int __main2(int argc, const char *argv[]);
 
@@ -36,8 +36,8 @@ extern int __main2(int argc, const char *argv[]);
  */
 char **environ = NULL;
 
-/*
- * Entry point of the program.
+/**
+ * @brief Entry point for the system.
  */
 void ___start(int argc, const char *argv[], char **envp)
 {
