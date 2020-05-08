@@ -42,6 +42,11 @@
 /**@{*/
 
 	/**
+	 * @brief sbrk() function.
+	 */
+	extern void *__nanvix_sbrk(size_t size);
+
+	/**
 	 * @brief Stub exit() function.
 	 */
 	extern NORETURN void ___nanvix_exit(int status);

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright(c) 2011-2019 The Maintainers of Nanvix
+ * Copyright(c) 2011-2020 The Maintainers of Nanvix
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,50 @@
 
 #include <nanvix/sys/dev.h>
 #include <nanvix/sys/thread.h>
-	#include <posix/sys/types.h>
+#include <posix/sys/types.h>
 #include <posix/stddef.h>
+
+/**
+ * @brief Heap size (in bytes).
+ */
+#define HEAP_SIZE (128*1024)
+
+/**
+ * @brief Heap.
+ */
+static struct
+{
+	unsigned char *brk;
+	unsigned char data[HEAP_SIZE];
+} heap = {
+	NULL, {0, }
+};
+
+/**
+ * The sbrk() function changes the breakpoint value of the calling process to
+ * @p size bytes ahead from the current value.
+ */
+void *__nanvix_sbrk(size_t size)
+{
+	unsigned char *ptr;
+	unsigned char *brk;
+
+	/* Initialize heap. */
+	if (heap.brk == NULL)
+		heap.brk = heap.data;
+
+	ptr = brk = heap.brk;
+
+	brk += size;
+
+	/* Cannot increase break value. */
+	if ((brk < heap.data) || (brk >= (heap.data + HEAP_SIZE)))
+		return ((void *) -1);
+
+	heap.brk = brk;
+
+	return (ptr);
+}
 
 /**
  *  Terminates the calling process.
