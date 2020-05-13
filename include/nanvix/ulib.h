@@ -96,6 +96,58 @@
 /**@}*/
 
 /*============================================================================*
+ * Memory Allocation                                                          *
+ *============================================================================*/
+
+/**
+ * @addtogroup ulib-memory
+ * @ingroup ulib
+ */
+/**@{*/
+
+	/**
+	 * @brief Allocates @p size bytes on memory.
+	 *
+	 * @param size Size (in bytes) to be allocated.
+	 *
+	 * @returns Upon successful completion, a pointer to the allocated
+	 * region is returned. A NULL pointer is returned instead.
+	 */
+	extern void * umalloc(size_t size);
+
+	/**
+	 * @brief Allocates an amount of bytes to store @p num elements
+	 * on memory.
+	 *
+	 * @param num  Number of elements to be stored.
+	 * @param size Size of each element.
+	 *
+	 * @returns Upon successful completion, a pointer to the allocated
+	 * region is returned. A NULL pointer is returned instead.
+	 */
+	extern void * ucalloc(unsigned int num, size_t size);
+
+	/**
+	 * @brief Reallocates a memory region freeing the original one.
+	 *
+	 * @param ptr  Pointer to the original memory region.
+	 * @param size Size of the new region to be allocated.
+	 *
+	 * @returns Upon successful completion, a pointer to the new
+	 * allocated region is returned. A NULL pointer is returned instead.
+	 */
+	extern void *urealloc(void *ptr, size_t size);
+
+	/**
+	 * @brief Frees a memory region to be used again.
+	 *
+	 * @param ptr Pointer to the memory region to be released.
+	 */
+	extern void ufree(void *ptr);
+
+/**@}*/
+
+/*============================================================================*
  * String Manipulation                                                        *
  *============================================================================*/
 
