@@ -185,6 +185,23 @@ void *umalloc(size_t size)
 }
 
 /**
+ * @brief Allocates memory.
+ *
+ * @param num  Number of elements of @p size to be allocated.
+ * @param size Number of bytes of one element.
+ *
+ * @see umalloc().
+ */
+void * ucalloc(unsigned int num, size_t size)
+{
+	/* Nothing to be done. */
+	if ((num == 0) || (size == 0))
+		return (NULL);
+
+	return (umalloc(num * size));
+}
+
+/**
  * @brief Reallocates a memory chunk.
  *
  * @param ptr  Pointer to old object.
