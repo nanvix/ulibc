@@ -185,20 +185,32 @@ void *umalloc(size_t size)
 }
 
 /**
- * @brief Allocates memory.
+ * @brief Allocates memory to hold @p num elements of size @p size,
+ * and initializes it to zero.
  *
  * @param num  Number of elements of @p size to be allocated.
  * @param size Number of bytes of one element.
  *
- * @see umalloc().
+ * @returns Pointer to the new allocated region.
  */
 void * ucalloc(unsigned int num, size_t size)
 {
+	void *p;
+	size_t num_bytes;
+
+	num_bytes = num * size;
+
 	/* Nothing to be done. */
-	if ((num == 0) || (size == 0))
+	if (num_bytes == 0)
 		return (NULL);
 
-	return (umalloc(num * size));
+	p = umalloc(num_bytes);
+
+	/* Initializes the region to ZERO. */
+	if (p != NULL)
+		umemset(p, 0, num_bytes);
+
+	return (p);
 }
 
 /**
