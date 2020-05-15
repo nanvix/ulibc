@@ -25,6 +25,7 @@
 #include <nanvix/ulib.h>
 #include <posix/stddef.h>
 #include <nanvix/sys/thread.h>
+#include <nanvix/sys/noc.h>
 
 /*
  * System-level main routine.
@@ -44,6 +45,8 @@ void ___start(int argc, const char *argv[], char **envp)
 	int ret;
 
 	environ = envp;
+
+	knoc_init();
 
 	ret = __main2(argc, argv);
 
