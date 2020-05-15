@@ -281,6 +281,17 @@
 	#endif
 
 	/**
+	 * @brief Panics the system.
+	 *
+	 * @param msg Panic message.
+	 */
+	#define upanic(msg)                         \
+		{                                       \
+			uprintf("[nanvix] PANIC: %s", msg); \
+			uabort();                           \
+		}
+
+	/**
 	 * @brief Fails an assertion.
 	 */
 	extern void _uassertfail(const char *, const char *, const char *, int);
