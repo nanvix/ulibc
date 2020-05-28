@@ -30,7 +30,7 @@
 /**
  * @brief Heap size (in bytes).
  */
-#define HEAP_SIZE (128*1024)
+#define HEAP_SIZE (64*KB)
 
 /**
  * @brief Heap.
