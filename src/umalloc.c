@@ -227,19 +227,23 @@ void * ucalloc(unsigned int num, size_t size)
 void *urealloc(void *ptr, size_t size)
 {
 	void *newptr;
+	struct block *p;
 
 	/* Nothing to be done. */
 	if (size == 0)
-	{
-		errno = EINVAL;
 		return (NULL);
-	}
 
 	newptr = umalloc(size);
-	if (ptr != NULL)
-		umemcpy(newptr, ptr, size);
 
-	ufree(ptr);
+	/* Checks if there are more operations to be done. */
+	if (ptr != NULL)
+	{
+		p = (struct block *) ptr-1;
+
+		umemcpy(newptr, ptr, p->size);
+
+		ufree(ptr);
+	}
 
 	return (newptr);
 }
