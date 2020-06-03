@@ -227,7 +227,6 @@ void * ucalloc(unsigned int num, size_t size)
 void *urealloc(void *ptr, size_t size)
 {
 	void *newptr;
-	struct block *p;
 
 	/* Nothing to be done. */
 	if (size == 0)
@@ -238,9 +237,7 @@ void *urealloc(void *ptr, size_t size)
 	/* Checks if there are more operations to be done. */
 	if (ptr != NULL)
 	{
-		p = (struct block *) ptr-1;
-
-		umemcpy(newptr, ptr, p->size);
+		umemcpy(newptr, ptr, size);
 
 		ufree(ptr);
 	}
