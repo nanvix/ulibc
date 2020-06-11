@@ -65,7 +65,7 @@ void ufree(void *ptr)
 	bp = (struct block *)ptr - 1;
 
 	/* Look for insertion point. */
-	for (p = freep; !(p < bp && p->nextp > bp); p = p->nextp)
+	for (p = freep; !(p <= bp && p->nextp >= bp); p = p->nextp)
 	{
 		/* Freed block at start or end. */
 		if (p >= p->nextp && (bp > p || bp < p->nextp))
@@ -100,8 +100,8 @@ void ufree(void *ptr)
  *
  * @param size Number of bytes to expand.
  *
- * @returns Upon successful completion a pointed to the expansion is returned.
- *          Upon failure, a null pointed is returned instead and errno is set
+ * @returns Upon successful completion a pointer to the expansion is returned.
+ *          Upon failure, a NULL pointer is returned instead and errno is set
  *          to indicate the error.
  */
 static void *expand(size_t size)
@@ -150,7 +150,7 @@ void *umalloc(size_t size)
 	}
 
 	/* Look for a free block that is big enough. */
-	for (p = freep; /* void */ ; prevp = p, p = p->nextp)
+	for (p = &head; /* void */ ; prevp = p, p = p->nextp)
 	{
 		/* Found. */
 		if (p->size >= size)
