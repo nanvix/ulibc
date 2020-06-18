@@ -150,7 +150,7 @@ void *umalloc(size_t size)
 	}
 
 	/* Look for a free block that is big enough. */
-	for (p = &head; /* void */ ; prevp = p, p = p->nextp)
+	for (p = prevp->nextp; /* void */ ; prevp = p, p = p->nextp)
 	{
 		/* Found. */
 		if (p->size >= size)
