@@ -22,6 +22,22 @@
  * SOFTWARE.
  */
 
+#if defined(__openrisc__) || defined(__x86__)
+
+#include <stddef.h>
+
+/**
+ * @brief Dummy string lenght.
+ */
+size_t strlen(const char *str)
+{
+	((void) str);
+
+	return (0);
+}
+
+#endif
+
 /**
  * @brief Dummy test driver.
  */

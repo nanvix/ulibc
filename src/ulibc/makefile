@@ -1,7 +1,7 @@
 #
 # MIT License
 #
-# Copyright(c) 2011-2020 The Maintainers of Nanvix
+# Copyright(c) 2018 Pedro Henrique Penna <pedrohenriquepenna@gmail.com>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -23,52 +23,18 @@
 #
 
 #===============================================================================
-# Conflicts
+# Binaries Soucers and Objects
 #===============================================================================
 
-.PHONY: ulibc 
-.PHONY: test
+# Binary
+ARCHIVE = $(LIBC)
+
+# C Source Files
+SRC = $(wildcard *.c)
+
+# Object Files
+OBJ = $(SRC:.c=.$(OBJ_SUFFIX).o)
 
 #===============================================================================
 
-# Builds Everything
-all: all-ulibc all-test
-
-# Cleans Build Objects
-clean: clean-ulibc clean-test
-
-# Cleans Everything
-distclean: distclean-ulibc distclean-test
-
-#===============================================================================
-# Test
-#===============================================================================
-
-# Builds The Test Driver
-all-test: all-ulibc
-	$(MAKE) -C test all
-
-# Cleans Test Driver Build Objects
-clean-test:
-	$(MAKE) -C test clean
-
-# Cleans Test Driver Build
-distclean-test:
-	$(MAKE) -C test distclean
-
-#===============================================================================
-# Ulibc 
-#===============================================================================
-
-# Builds User Libraries
-all-ulibc:
-	$(MAKE) -C ulibc all
-
-# Cleans User Libraries Build Objects
-clean-ulibc:
-	$(MAKE) -C ulibc clean
-
-# Cleans User Libraries Build
-distclean-ulibc:
-	$(MAKE) -C ulibc distclean
-
+include $(BUILDDIR)/makefile.archive
