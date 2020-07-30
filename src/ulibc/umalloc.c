@@ -34,6 +34,21 @@
 #define BLOCK_SIZE 512
 
 /**
+ * @brief Size of the meta-information of a block.
+ */
+#define BLOCK_STRUCT_SIZE (sizeof(struct block))
+
+/**
+ * @brief Real size of the block (metadata + user data).
+ */
+#define BLOCK_META_SIZE(_size) (BLOCK_STRUCT_SIZE + _size)
+
+/**
+ * @brief Minimum size of block in bytes (metadata + 1 char).
+ */
+#define BLOCK_MIN_SIZE (BLOCK_META_SIZE(sizeof(char)))
+
+/**
  * @brief Memory block.
  */
 struct block
@@ -65,10 +80,10 @@ void ufree(void *ptr)
 	bp = (struct block *)ptr - 1;
 
 	/* Look for insertion point. */
-	for (p = freep; !(p <= bp && p->nextp >= bp); p = p->nextp)
+	for (p = freep; !(p <= bp && bp <= p->nextp); p = p->nextp)
 	{
 		/* Freed block at start or end. */
-		if (p >= p->nextp && (bp > p || bp < p->nextp))
+		if (p >= p->nextp && (p < bp || bp < p->nextp))
 			break;
 	}
 
@@ -98,7 +113,7 @@ void ufree(void *ptr)
  *
  * @details Expands the heap by @p size (in bytes).
  *
- * @param size Number of bytes to expand.
+ * @param size Number of bytes to expand (Struct size + request_size).
  *
  * @returns Upon successful completion a pointer to the expansion is returned.
  *          Upon failure, a NULL pointer is returned instead and errno is set
@@ -106,8 +121,8 @@ void ufree(void *ptr)
  */
 static void *expand(size_t size)
 {
-	struct block *p;
 	size_t n;
+	struct block *p;
 
 	/* Expand in BLOCK_SIZE multiple bytes. */
 	n = TRUNCATE(size, BLOCK_SIZE);	
@@ -135,7 +150,9 @@ static void *expand(size_t size)
  */
 void *umalloc(size_t size)
 {
+	size_t bsize;        /* Requested block size.     */
 	struct block *p;     /* Working block.            */
+	struct block *q;     /* Auxiliar block.           */
 	struct block *prevp; /* Previous working block.   */
 
 	/* Nothing to be done. */
@@ -149,22 +166,33 @@ void *umalloc(size_t size)
 		head.size = 0;
 	}
 
+	bsize = BLOCK_META_SIZE(size);
+
 	/* Look for a free block that is big enough. */
 	for (p = prevp->nextp; /* void */ ; prevp = p, p = p->nextp)
 	{
 		/* Found. */
-		if (p->size >= size)
+		if (p->size >= bsize)
 		{
-			/* Exact. */
-			if (p->size == size)
+			/* Exact or there isn't enough space for another block. */
+			if (WITHIN(p->size, bsize, bsize + BLOCK_MIN_SIZE))
 				prevp->nextp = p->nextp;
 
 			/* Split block. */
 			else
 			{
-				p->size -= size;
-				p += p->size;
-				p->size = size;
+				/* Gets the next block pointer. */
+				q = (struct block *) (((char *) p) + bsize);
+
+				/* Sets remaining size. */
+				q->size = (p->size - bsize);
+
+				/* Puts new block into free list. */
+				prevp->nextp = q;
+				q->nextp     = p->nextp;
+
+				/* Updates size of allocated block. */
+				p->size = bsize;
 			}
 
 			freep = prevp;
@@ -176,7 +204,7 @@ void *umalloc(size_t size)
 		if (p == freep)
 		{
 			/* Expand heap. */
-			if ((p = expand(size)) == NULL)
+			if ((p = expand(bsize)) == NULL)
 				break;
 		}
 	}
@@ -222,7 +250,8 @@ void * ucalloc(unsigned int num, size_t size)
  * @returns Upon successful completion, nanvix_realloc() returns a pointer to the
  *           allocated space. Upon failure, a null pointer is returned instead.
  *
- * @todo Check if we can simply expand.
+ * @todo Check if we can simply expand. Careful to allocate size for metadata
+ * and user data.
  */
 void *urealloc(void *ptr, size_t size)
 {
