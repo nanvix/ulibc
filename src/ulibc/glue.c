@@ -62,7 +62,7 @@ void *__nanvix_sbrk(size_t size)
 
 	/* Cannot increase break value. */
 	if ((brk < heap.data) || (brk >= (heap.data + HEAP_SIZE)))
-		return ((void *) -1);
+		return (NULL);
 
 	heap.brk = brk;
 
