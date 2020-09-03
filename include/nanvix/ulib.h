@@ -240,9 +240,9 @@
 /**@{*/
 
 	/**
-	 * @see __vsprintf().
+	 * @see __vsnprintf().
 	 */
-	#define uvsprintf(str,fmt,args) __vsprintf(str,fmt,args)
+	#define uvsprintf(str,size,fmt,args) __vsnprintf(str,size,fmt,args)
 
 	/**
 	 * @see __sprintf().
