@@ -74,7 +74,7 @@ void *__nanvix_sbrk(size_t size)
  */
 NORETURN void ___nanvix_exit(int status)
 {
-	if (kthread_self() == 1)
+	if (kthread_self() == KTHREAD_LEADER_TID)
 		_kexit(status);
 	else
 		kthread_exit(&status);
