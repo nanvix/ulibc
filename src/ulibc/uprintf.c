@@ -31,14 +31,14 @@
  */
 int uprintf(const char *fmt, ...)
 {
-	size_t len;       /* String length.           */
-	va_list args;     /* Variable arguments list. */
-	char buffer[256]; /* Temporary buffer.        */
+	size_t len;                    /* String length.           */
+	va_list args;                  /* Variable arguments list. */
+	char buffer[KBUFFER_SIZE + 1]; /* Temporary buffer.        */
 
 	/* Convert to raw string. */
 	va_start(args, fmt);
-	len = uvsprintf(buffer, fmt, args);
-	buffer[len++] = '\0';
+	len = uvsprintf(buffer, KBUFFER_SIZE + 1, fmt, args);
+	buffer[++len] = '\0';
 	va_end(args);
 
 	nanvix_write(0, buffer, ustrlen(buffer));
